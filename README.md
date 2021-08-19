@@ -17,6 +17,216 @@
 
 ![img.png](/home/assass1n/Projects/ok-202105-resume-ab/photo_2021-08-02_01-54-02.jpg)
 
-Дальний горизонт функционала:
-* Поиск резюме по выбранным тэгам
-* Отслеживание поисков и продажа курсов для прокачки самых востребованных навыков
+Будет реализовано в рамках курса Otus Kotlin:
+* Сервис просмотра резюме
+* Сервис создания / редактирования / удаления резюме
+
+
+## Сервис просмотра Резюме
+> GET /resumes/{resume_id}
+> 
+где `resume_id` – идентификатор резюме.
+
+#### Ответ
+
+Успешный ответ приходит с кодом 200 OK и содержит тело:
+
+`
+{
+    "id": "12345678901234567890123456789012abcdef",
+    "last_name": "Фамилия",
+    "first_name": "Имя",
+    "middle_name": "Отчество",
+    "age": 36,
+    "birth_date": "1980-05-08",
+    "gender": {
+        "id": "male",
+        "name": "Мужской"
+    },
+    "area": 
+        {
+            "id": "1",
+            "name": "Москва"
+        },
+    "contact": 
+        [
+            {
+                "type": 
+                    {                
+                        "id": "phone",
+                        "name": "Мобильный телефон"
+                    }
+                "preferred": false,
+                "value": "+71234567890"
+            },
+            {
+                "id": "mail",
+                "name": "Электронная почта"
+                "preferred": false,
+                "value": "mail@mail.ru"
+            },
+            {
+                "id": "telegram",
+                "name": "Телеграм"
+                "preferred": true,
+                "value": "@NickName"
+            },
+            {
+                "id": "git",
+                "name": "Git аккаунт"
+                "preferred": false,
+                "value": "https://github.com/AlekseyBulaev"
+            },
+            {
+                "id": "linkedIn",
+                "name": "LinkedIn аккаунт"
+                "preferred": false,
+                "value": "https://linkedIn.com/AlekseyBulaev"
+            },
+        ],
+    "experience": 
+        [
+            {
+                "id": "123456abcdef"
+                "experience_type": "WORK"
+                "name": "Название работодателя",
+                "url": "http://www.rbc.ru",
+                "position": "Должность",
+                "start": "2005-04-01",
+                "end": "2013-01-01",
+                "skill_duties": 
+                    [
+                        {
+                            "id": "JAVA",
+                            "name": "Java"
+                            "description": "описание задач и достижений"
+                        }
+                    ]
+                "description": "Описание деятельности в компании"
+            },
+            {
+                "experience_type": "PET_PROJECT"
+                "name": "Название проекта",
+                "area": null
+                "url": "http://www.rbc.ru",
+                "industries": null,
+                "position": null,
+                "start": "2005-04-01",
+                "end": "2013-01-01",
+                "skill_duties":
+                    [
+                        {
+                            "id": "KAFKA",
+                            "name": "Kafka"
+                            "description": "описание задач и достижений"
+                        }
+                    ]
+                "description": "Описание проекта"
+            },
+            {
+                "experience_type": "EDUCATION"
+                "name": "Название учебного заведения",
+                "area": null
+                "url": "http://www.rbc.ru",
+                "industries": null,
+                "position": null,
+                "start": "2005-04-01",
+                "end": "2013-01-01",
+                "skill_duties": null
+                "description": "специализацтя"
+            }
+        ],
+    "total_experience": 
+        {
+            "months": 94
+        }
+}
+`
+
+
+|Имя |Тип  | Описание|
+--- | --- | ---
+|id|string|Идентификатор резюме.|
+|last_name|string или null|Фамилия.|
+|first_name|string или null|Имя.|
+|middle_name|string или null|Отчество.|
+|age|number или null|Возраст.|
+|birth_date|string или null|День рождения (в формате ГГГГ-ММ-ДД).|
+|gender|object или null|Пол. Элемент справочника gender.|
+|area|object или null|Город проживания. Элемент справочника areas.|
+|contact|array|Список контактов соискателя.|
+|experience|object или null|Пол. Элемент справочника gender.|
+|total_experience|number или null|Общий опыт работы.|
+
+Объект с именем и идентификатором
+
+|Имя |Тип  | Описание|
+--- | --- | ---
+|id|string|Идентификатор поля.|
+|name|string|Название поля.| 
+
+Объект contact
+
+|Имя |Тип  | Описание|
+--- | --- | ---
+|type|object|Тип контакта. Элемент справочника preferred_contact_type.|
+|value|string или object или null|Значение контакта. Для телефона  – объект, для email — строка.| 
+|preferred|boolean|Является ли данный способ связи предпочитаемым (обязательно указать один контакт как предпочитаемый "preferred": true, в случае если preferred не передан, считаем, что передано значение false).| 
+
+Объект experience
+
+|Имя |Тип  | Описание|
+--- | --- | ---
+|id|string|Идентификатор.|
+|experience_type|object|Тип компетенции. Элемент справочника experience_type.|
+|name|string или null|Название работодателя/проекта/учебного заведения| 
+|area|String|Описание достижений, задач, опыта с данной компетенцией.|
+|url|String или null|ссылка на организацию/проект/учебное заведение|
+|position|String или null|должность|
+|start|String|Начало работы (дата в формате ГГГГ-ММ-ДД).|
+|end|String|Окончание работы (дата в формате ГГГГ-ММ-ДД).|
+|skill_duties|object или null|ссылка на организацию/проект/учебное заведение|
+|description|String или null|Обязанности, функции, достижения.|
+
+Объект skill_duties
+
+|Имя |Тип  | Описание|
+--- | --- | ---
+|id|object|Тип компетенции. Элемент справочника skill_duties_type.|
+|name|string или null|наименование компетенции.| 
+|description|String|Описание достижений, задач, опыта с данной компетенцией.| 
+
+
+## Создание и редактирование резюме
+`POST /resumes` — добавление резюме id == null.
+`POST /resumes` - редактирование существующего id != null. В качестве тела запроса используется json в том же формате, 
+что отдается при GET запросе. При этом для полей с данными справочников из передаваемой JSON-структуры используются 
+только id передаваемых данных.
+
+###Ответ
+
+Успешный ответ на создание резюме приходит с кодом 201 Created, в заголовке Location при этом будет url созданного резюме:
+
+>Location: /resumes/0123456789abcdef
+
+Успешный ответ на обновление резюме приходит с кодом 204 No Content и не содержит тела.
+Ошибки
+
+    400 Bad Request - ошибка в полях резюме. Дополнительно придет расширенная информация по ошибкам.
+    404 Not Found – резюме не найдено или недоступно текущему пользователю (при обновлении)
+
+## Удаление резюме
+
+`DELETE /resumes/{resume_id}`
+
+где `resume_id` – идентификатор резюме.
+
+Резюме удаляется без возможности восстановления.
+
+###Ответ
+
+В случае успешного удаления вернётся код ответа 204 No Content без тела.
+
+Ошибки
+
+    404 Not Found – резюме не найдено или недоступно текущему пользователю.
