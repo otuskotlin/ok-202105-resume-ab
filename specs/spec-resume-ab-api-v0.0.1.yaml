@@ -1,0 +1,476 @@
+openapi: 3.0.3
+info:
+  title: ok-resume-ab
+  description: 'This is a sample server resume server. [Repo here](https://github.com/otuskotlin/ok-202105-resume-ab) '
+  license:
+    name: MIT open source license
+    url: https://github.com/otuskotlin/ok-202105-resume-ab
+  version: 0.0.1
+servers:
+  - url: https://localhost/
+tags:
+  - name: resume
+    description: Резюме (CRUD)
+paths:
+  /resume/init:
+    post:
+      tags:
+        - resume
+      summary: Получить статус при инициализации
+      operationId: initResume
+      requestBody:
+        description: Объект запроса для инициализации при старте приложения
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InitResumeRequest'
+        required: true
+      responses:
+        200:
+          description: all responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InitResumeResponse'
+  /resume/create:
+    post:
+      tags:
+        - resume
+      summary: Создать новое резюме
+      operationId: createResume
+      requestBody:
+        description: Объект запроса для создания нового резюме
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateResumeRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateResumeResponse'
+  /resume/read:
+    post:
+      tags:
+        - resume
+      summary: Получить информацию о резюме
+      operationId: readResume
+      requestBody:
+        description:  Объект запроса для получения информации о резюме
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReadResumeRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadResumeResponse'
+  /resume/update:
+    post:
+      tags:
+        - resume
+      summary: Обновить резюме
+      operationId: updateResume
+      requestBody:
+        description: Объект запроса для обновления резюме
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateResumeRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateResumeResponse'
+  /resume/delete:
+    post:
+      tags:
+        - resume
+      summary: Удалить резюме
+      operationId: deleteResume
+      requestBody:
+        description: Объект запроса для удаления резюме
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteResumeRequest'
+        required: true
+      responses:
+        200:
+          description: All responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResumeResponse'
+components:
+  schemas:
+
+    BaseMessage:
+      type: object
+      description: Базовый класс для запросов и для ответов
+      properties:
+        messageType:
+          type: string
+          title: Дискриминатор
+          description: Дискриминатор, содержащий тип класса сообщения и использующийся для десериализации
+      discriminator:
+        propertyName: messageType
+
+    BaseRequest:
+      description: Базовый класс для всех запросов
+      allOf:
+        - type: object
+          properties:
+            requestId:
+              type: string
+
+    BaseResponse:
+      description: Базовый класс для всех ответов
+      allOf:
+        - type: object
+          properties:
+            requestId:
+              type: string
+            result:
+              type: string
+              enum:
+                - success
+                - error
+            errors:
+              type: array
+              items:
+                $ref: '#/components/schemas/RequestError'
+
+    RequestError:
+      type: object
+      description: Описание ошибки обработки запроса
+      properties:
+        message:
+          type: string
+        field:
+          type: string
+
+    ResumeGender:
+      type: string
+      description: Пол. Элемент справочника gender.
+      enum:
+        - male
+        - female
+
+    ResumeArea:
+      type: string
+      description: Город проживания. Элемент справочника areas.
+      enum:
+        - Moscow
+        - NotMoscow
+
+    ResumeContacts:
+      type: array
+      description: Список контактов соискателя.
+      items:
+        $ref: '#/components/schemas/ResumeContact'
+
+    ResumeExperiences:
+      type: array
+      description: перечисление опыта
+      items:
+        $ref: '#/components/schemas/ResumeExperience'
+
+    ResumeExperience:
+      type: object
+      description: Объект типа опыт описывающий опыт в одной компании/проекте.
+      properties:
+        experience_type:
+          type: string
+          description:
+          enum:
+            - WORK
+            - PROJECT
+            - EDUCATION
+        name:
+          type: string
+          description: Название проекта
+        url:
+          type: string
+          description: Ссылка на проект/работодателя/учебное заведение
+        position:
+          type: string
+          description: должность
+        start:
+          type: string
+          description: Начало работы (дата в формате ГГГГ-ММ-ДД).
+        end:
+          type: string
+          description: Окончание работы (дата в формате ГГГГ-ММ-ДД).
+        description:
+          type: string
+          description: Обязанности, функции, достижения.
+        skill_duties:
+          $ref: '#/components/schemas/ResumeSkills'
+
+    ResumeSkills:
+      type: array
+      description: перечисление задач.достижений по каждому навыку
+      items:
+        $ref: '#/components/schemas/ResumeSkill'
+
+    ResumeSkill:
+      type: object
+      description: перечисление задач.достижений по каждому навыку
+      properties:
+        id:
+          type: string
+          description: Тип компетенции. Элемент справочника skill_duties_type.
+          enum:
+            - java
+            - kotlin
+            - sql
+            - javaScript
+            - html
+            - css
+            - kafa
+            - activeMQ
+        description:
+          type: string
+          description: Описание достижений, задач, опыта с данной компетенцией.
+
+    ResumeContact:
+      type: object
+      description: Структура с данными о контакте
+      properties:
+        id:
+          type: string
+          description: Тип контакта. Элемент справочника preferred_contact_type.
+          enum:
+            - phone
+            - eMail
+            - telegram
+            - linkedin
+            - git
+        value:
+          type: string
+          description: Значение контакта. Для телефона  – объект, для email — строка.
+        preferred:
+          type: boolean
+          description: Является ли данный способ связи предпочитаемым.
+
+    CreatableResume:
+      type: object
+      description: Структура с данными о резюме для запроса о созадии
+      properties:
+        last_name:
+          type: string
+          title: Заголовок объявления
+          description: Краткое название объявления
+        first_name:
+          type: string
+          title: Описание объявления
+          description: Тело объявления с описанием особенностей выставляемой заявки
+        age:
+          type: string
+          title: Идентификатор владельца объявления
+          description: Идентификатор пользователя, который создал и управляет объявлением
+        birth_date:
+          type: string
+          title: Идентификатор владельца объявления
+          description: Идентификатор пользователя, который создал и управляет объявлением
+        gender:
+          $ref: '#/components/schemas/ResumeGender'
+        area:
+          $ref: '#/components/schemas/ResumeArea'
+        contact:
+          $ref: '#/components/schemas/ResumeContact'
+        experience:
+          $ref: '#/components/schemas/ResumeExperiences'
+
+    UpdatableResume:
+      description: Структура для данных о резюме в запросе на обновление
+      allOf:
+        - $ref: '#/components/schemas/CreatableResume'
+        - type: object
+          properties:
+            id:
+              type: string
+              description: Идентификатор резюме
+
+    ResponseResume:
+      description: Структура, описывающая резюме в ответе
+      allOf:
+        - $ref: '#/components/schemas/UpdatableResume'
+        - type: object
+          properties:
+            permissions:
+              type: array
+              uniqueItems: true
+              items:
+                $ref: '#/components/schemas/ResumePermissions'
+
+    ResumePermissions:
+      type: string
+      description: Доступы к операциям над резюме
+      enum:
+        - read
+        - update
+
+    BaseDebugRequest:
+      type: object
+      description: Структура с описанием отладочных параметров запроса
+      properties:
+        mode:
+          type: string
+          default: prod
+          enum:
+            - prod
+            - test
+            - stub
+
+    InitResumeRequest:
+      description: Структура для запроса начального состояния при старте вэб-клиента
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseRequest'
+
+    InitResumeResponse:
+      description: Структура для ответа с начальным состоянием при старте вэб-клиента
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+
+
+    CreateResumeRequest:
+      description: Структура для запроса создания нового резюме
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseRequest'
+        - type: object
+          properties:
+            createAd:
+              $ref: '#/components/schemas/CreatableResume'
+            debug:
+              allOf:
+                - $ref: '#/components/schemas/BaseDebugRequest'
+                - type: object
+                  properties:
+                    stub:
+                      type: string
+                      enum:
+                        - success
+                        - emptyTitle
+                        - databaseError
+
+    CreateResumeResponse:
+      description: Структура для ответа на запрос о создании резюме
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            createdAd:
+              $ref: '#/components/schemas/ResponseResume'
+
+
+
+    ReadResumeRequest:
+      description: Структура для получения резюме
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseRequest'
+        - type: object
+          properties:
+            readAdId:
+              type: string
+            debug:
+              allOf:
+                - $ref: '#/components/schemas/BaseDebugRequest'
+                - type: object
+                  properties:
+                    stub:
+                      type: string
+                      enum:
+                        - success
+                        - emptyId
+                        - databaseError
+
+    ReadResumeResponse:
+      description: Структура для ответа на запрос с информацией о резюме
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            readAd:
+              $ref: '#/components/schemas/ResponseResume'
+
+    UpdateResumeRequest:
+      description: Структура для запроса обновления существующего резюме
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseRequest'
+        - type: object
+          properties:
+            createResume:
+              $ref: '#/components/schemas/UpdatableResume'
+            debug:
+              allOf:
+                - $ref: '#/components/schemas/BaseDebugRequest'
+                - type: object
+                  properties:
+                    stub:
+                      type: string
+                      enum:
+                        - success
+                        - emptyTitle
+                        - databaseError
+
+    UpdateResumeResponse:
+      description: Структура для ответа на запрос с информацией о резюме
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            updatedResume:
+              $ref: '#/components/schemas/ResponseResume'
+
+    DeleteResumeRequest:
+      description: Структура для запроса удаления резюме
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseRequest'
+        - type: object
+          properties:
+            deleteResumeId:
+              type: string
+            debug:
+              allOf:
+                - $ref: '#/components/schemas/BaseDebugRequest'
+                - type: object
+                  properties:
+                    stub:
+                      type: string
+                      enum:
+                        - success
+                        - emptyId
+                        - databaseError
+
+    DeleteResumeResponse:
+      description: Структура для ответа на запрос об удалении резюме
+      allOf:
+        - $ref: '#/components/schemas/BaseMessage'
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            deletedResume:
+              $ref: '#/components/schemas/ResponseResume'
+
