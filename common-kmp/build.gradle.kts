@@ -2,7 +2,7 @@ plugins {
     kotlin("multiplatform")
 }
 
-group = "ru.otus.otuskotlin.resume-ab"
+group = "ru.otus.otuskotlin.resume"
 version = "0.0.1"
 
 repositories {

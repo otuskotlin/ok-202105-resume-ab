@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: ok-resume-ab
+  title: ok-resume
   description: 'This is a sample server resume server. [Repo here](https://github.com/otuskotlin/ok-202105-resume-ab) '
   license:
     name: MIT open source license
@@ -270,26 +270,25 @@ components:
       properties:
         last_name:
           type: string
-          title: Заголовок объявления
-          description: Краткое название объявления
+          description: Фамилия
         first_name:
           type: string
-          title: Описание объявления
-          description: Тело объявления с описанием особенностей выставляемой заявки
+          description: Имя
+        middle_name:
+          type: string
+          description: Отчество
         age:
           type: string
-          title: Идентификатор владельца объявления
-          description: Идентификатор пользователя, который создал и управляет объявлением
+          description:  Возраст
         birth_date:
           type: string
-          title: Идентификатор владельца объявления
-          description: Идентификатор пользователя, который создал и управляет объявлением
+          description: День рождения (в формате ГГГГ-ММ-ДД).
         gender:
           $ref: '#/components/schemas/ResumeGender'
         area:
           $ref: '#/components/schemas/ResumeArea'
         contact:
-          $ref: '#/components/schemas/ResumeContact'
+          $ref: '#/components/schemas/ResumeContacts'
         experience:
           $ref: '#/components/schemas/ResumeExperiences'
 
@@ -355,7 +354,7 @@ components:
         - $ref: '#/components/schemas/BaseRequest'
         - type: object
           properties:
-            createAd:
+            createResume:
               $ref: '#/components/schemas/CreatableResume'
             debug:
               allOf:
@@ -376,7 +375,7 @@ components:
         - $ref: '#/components/schemas/BaseResponse'
         - type: object
           properties:
-            createdAd:
+            createdResume:
               $ref: '#/components/schemas/ResponseResume'
 
 
@@ -388,7 +387,7 @@ components:
         - $ref: '#/components/schemas/BaseRequest'
         - type: object
           properties:
-            readAdId:
+            readresumeId:
               type: string
             debug:
               allOf:
@@ -409,7 +408,7 @@ components:
         - $ref: '#/components/schemas/BaseResponse'
         - type: object
           properties:
-            readAd:
+            readResume:
               $ref: '#/components/schemas/ResponseResume'
 
     UpdateResumeRequest:

@@ -1,4 +1,4 @@
-rootProject.name = "resume-ab"
+rootProject.name = "resume"
 
 pluginManagement {
     plugins {
