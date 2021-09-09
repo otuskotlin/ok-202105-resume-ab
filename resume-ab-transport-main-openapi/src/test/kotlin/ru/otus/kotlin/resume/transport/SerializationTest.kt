@@ -1,3 +1,5 @@
+package ru.otus.kotlin.resume.transport
+
 import com.fasterxml.jackson.databind.ObjectMapper
 import ru.otus.otuskotlin.resume.openapi.models.*
 import kotlin.test.Test

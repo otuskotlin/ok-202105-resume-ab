@@ -112,6 +112,90 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeleteResumeResponse'
+#  /resume/{resumeId}/resumeExp/create:
+#    post:
+#      tags:
+#        - resume
+#        - resumeExp
+#      summary: Создать новый объект характеризующий опыт
+#      operationId: createResumeExp
+#      requestBody:
+#        description: Объект запроса для создания нового опыта с привязкой к резюме
+#        content:
+#          application/json:
+#            schema:
+#              $ref: '#/components/schemas/CreateResumeExpRequest'
+#        required: true
+#      responses:
+#        200:
+#          description: All responses
+#          content:
+#            application/json:
+#              schema:
+#                $ref: '#/components/schemas/CreateResumeExpResponse'
+#  /resume/{resumeId}/resumeExp/read:
+#    post:
+#      tags:
+#        - resume
+#        - resumeExp
+#      summary: Получить информацию об объектe характеризующий опыт
+#      operationId: readResumeExp
+#      requestBody:
+#        description: Объект запроса для чтения опыта с привязкой к резюме
+#        content:
+#          application/json:
+#            schema:
+#              $ref: '#/components/schemas/ReadResumeExpRequest'
+#        required: true
+#      responses:
+#        200:
+#          description: All responses
+#          content:
+#            application/json:
+#              schema:
+#                $ref: '#/components/schemas/ReadResumeExpResponse'
+#  /resume/{resumeId}/resumeExp/update:
+#    post:
+#      tags:
+#        - resume
+#        - resumeExp
+#      summary: Обновить информацию об объектe характеризующий опыт
+#      operationId: updateResumeExp
+#      requestBody:
+#        description: Объект запроса для обновления опыта с привязкой к резюме
+#        content:
+#          application/json:
+#            schema:
+#              $ref: '#/components/schemas/UpdateResumeExpRequest'
+#        required: true
+#      responses:
+#        200:
+#          description: All responses
+#          content:
+#            application/json:
+#              schema:
+#                $ref: '#/components/schemas/UpdateResumeExpResponse'
+#  /resume/{resumeId}/resumeExp/delete:
+#    post:
+#      tags:
+#        - resume
+#        - resumeExp
+#      summary: Удалить информацию об объектe характеризующий опыт
+#      operationId: deleteResumeExp
+#      requestBody:
+#        description: Объект запроса для удаления опыта с привязкой к резюме
+#        content:
+#          application/json:
+#            schema:
+#              $ref: '#/components/schemas/DeleteResumeExpRequest'
+#        required: true
+#      responses:
+#        200:
+#          description: All responses
+#          content:
+#            application/json:
+#              schema:
+#                $ref: '#/components/schemas/DeleteResumeExpResponse'
 components:
   schemas:
 
@@ -166,26 +250,19 @@ components:
       enum:
         - male
         - female
-
-    ResumeArea:
-      type: string
-      description: Город проживания. Элемент справочника areas.
-      enum:
-        - Moscow
-        - NotMoscow
-
+    #todo: отдельный CRUD для списка контактов
     ResumeContacts:
       type: array
       description: Список контактов соискателя.
       items:
         $ref: '#/components/schemas/ResumeContact'
-
+    #todo: отдельный CRUD для опыта
     ResumeExperiences:
       type: array
       description: перечисление опыта
       items:
         $ref: '#/components/schemas/ResumeExperience'
-
+    #todo: отдельный CRUD для опыта
     ResumeExperience:
       type: object
       description: Объект типа опыт описывающий опыт в одной компании/проекте.
@@ -215,15 +292,13 @@ components:
         description:
           type: string
           description: Обязанности, функции, достижения.
-        skill_duties:
-          $ref: '#/components/schemas/ResumeSkills'
-
+    #todo: отдельный CRUD для навыков
     ResumeSkills:
       type: array
       description: перечисление задач.достижений по каждому навыку
       items:
         $ref: '#/components/schemas/ResumeSkill'
-
+    #todo: отдельный CRUD для навыков
     ResumeSkill:
       type: object
       description: перечисление задач.достижений по каждому навыку
@@ -243,7 +318,7 @@ components:
         description:
           type: string
           description: Описание достижений, задач, опыта с данной компетенцией.
-
+    #todo: отдельный CRUD для контактов
     ResumeContact:
       type: object
       description: Структура с данными о контакте
@@ -264,6 +339,14 @@ components:
           type: boolean
           description: Является ли данный способ связи предпочитаемым.
 
+    ResumeVisibility:
+      type: string
+      description: 'Тип видимости резюме. Возможные значения: видит только владелец, только зарегистрированный в системе пользователь, видимо всем'
+      enum:
+        - ownerOnly
+        - registeredOnly
+        - public
+
     CreatableResume:
       type: object
       description: Структура с данными о резюме для запроса о созадии
@@ -280,17 +363,20 @@ components:
         age:
           type: string
           description:  Возраст
+        ownerId:
+          type: string
+          title: Идентификатор владельца резюме
+          description: Идентификатор пользователя, который создал и управляет резюме
         birth_date:
           type: string
           description: День рождения (в формате ГГГГ-ММ-ДД).
         gender:
-          $ref: '#/components/schemas/ResumeGender'
-        area:
-          $ref: '#/components/schemas/ResumeArea'
-        contact:
-          $ref: '#/components/schemas/ResumeContacts'
-        experience:
-          $ref: '#/components/schemas/ResumeExperiences'
+          description: Пол. Элемент справочника gender.
+          enum:
+            - male
+            - female
+        visibility:
+          $ref: '#/components/schemas/ResumeVisibility'
 
     UpdatableResume:
       description: Структура для данных о резюме в запросе на обновление
