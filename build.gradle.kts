@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "ru.otus.otuskotlin.resume"
-version = "0.0.1"
+version = "1.0.0"
 
 subprojects {
     group = rootProject.group

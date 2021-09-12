@@ -2,7 +2,7 @@ package ru.otus.otuskotlin.resume.backend.transport.mapping.kmp
 
 import ru.otus.otuskotlin.resume.backend.common.context.ResumeContext
 import ru.otus.otuskotlin.resume.backend.common.models.*
-import ru.otus.otuskotlin.resume.mp.models.*
+import ru.otus.otuskotlin.resume.openapi.models.*
 
 fun ResumeContext.toInitResponse() = InitResumeResponse(
     requestId = onRequest.takeIf { it.isNotBlank() },

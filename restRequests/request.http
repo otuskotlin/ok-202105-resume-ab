@@ -1,0 +1,50 @@
+### create
+POST http://localhost:8080/resume/create
+Content-Type: application/json
+
+{
+  "messageType": "CreateResumeRequest",
+  "requestId": "1",
+  "createResume": {
+    "lastName": "Ivanov",
+    "firstName": "Ivan",
+    "middleName": "Ivanovich",
+    "age": "10",
+    "ownerId": "123",
+    "birthDate": "2011-10-10",
+    "gender": "male",
+    "visibility": "public"
+  },
+  "debug": {
+    "mode": "stub",
+    "stub": "success"
+  }
+}
+
+###read
+POST http://localhost:8080/resume/read
+Content-Type: application/json
+
+{
+  "messageType": "ReadResumeRequest",
+  "requestId": "2",
+  "readResumeId": "123",
+  "debug": {
+    "mode": "stub",
+    "stub": "success"
+  }
+}
+
+### delete
+POST http://localhost:8080/resume/delete
+Content-Type: application/json
+
+{
+  "messageType": "DeleteResumeRequest",
+  "requestId": null,
+  "deleteResumeId": "123",
+  "debug": {
+    "mode": "stub",
+    "stub": "success"
+  }
+}

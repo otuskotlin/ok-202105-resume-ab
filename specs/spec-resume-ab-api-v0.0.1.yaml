@@ -351,13 +351,13 @@ components:
       type: object
       description: Структура с данными о резюме для запроса о созадии
       properties:
-        last_name:
+        lastName:
           type: string
           description: Фамилия
-        first_name:
+        firstName:
           type: string
           description: Имя
-        middle_name:
+        middleName:
           type: string
           description: Отчество
         age:
@@ -367,7 +367,7 @@ components:
           type: string
           title: Идентификатор владельца резюме
           description: Идентификатор пользователя, который создал и управляет резюме
-        birth_date:
+        birthDate:
           type: string
           description: День рождения (в формате ГГГГ-ММ-ДД).
         gender:
@@ -473,7 +473,7 @@ components:
         - $ref: '#/components/schemas/BaseRequest'
         - type: object
           properties:
-            readresumeId:
+            readResumeId:
               type: string
             debug:
               allOf:
