@@ -4,6 +4,8 @@ pluginManagement {
     plugins {
         val kotlinVersion: String by settings
         val openApiVersion: String by settings
+        val bmuschkoVersion: String by settings
+
         kotlin("jvm") version kotlinVersion
         kotlin("multiplatform") version kotlinVersion
         kotlin("plugin.serialization") version kotlinVersion
@@ -17,6 +19,7 @@ pluginManagement {
         id("org.springframework.boot") version springBootVersion
         id("io.spring.dependency-management") version springDependencyVersion
         kotlin("plugin.spring") version springPluginVersion
+        id("com.bmuschko.docker-java-application") version bmuschkoVersion
 
     }
 }

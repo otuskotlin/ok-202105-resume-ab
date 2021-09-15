@@ -4,10 +4,27 @@ val logbackVersion: String by project
 plugins {
     application
     kotlin("jvm")
+    id("com.bmuschko.docker-java-application")
 }
 
 application {
     mainClass.set("io.ktor.server.netty.EngineMain")
+}
+
+docker {
+    javaApplication {
+        mainClassName.set(application.mainClass.get())
+        baseImage.set("adoptopenjdk/openjdk11:alpine-jre")
+        ports.set(listOf(8080))
+        val imageName = project.name
+        images.set(
+            listOf(
+                "$imageName:${project.version}",
+                "$imageName:latest"
+            )
+        )
+        jvmArgs.set(listOf("-Xms256m", "-Xmx512m"))
+    }
 }
 
 repositories {
