@@ -43,3 +43,9 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+tasks {
+    bootBuildImage {
+        imageName = "${project.name}:${project.version}"
+    }
+}
