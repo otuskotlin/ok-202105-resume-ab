@@ -1,5 +1,6 @@
 val ktorVersion: String by project
 val logbackVersion: String by project
+val koinVersion: String by project
 
 plugins {
     application
@@ -41,6 +42,10 @@ dependencies {
     implementation(ktor("jackson"))
 
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
+
+    //koin
+    implementation("io.insert-koin:koin-ktor:$koinVersion")
+    implementation("io.insert-koin:koin-logger-slf4j:$koinVersion")
 
     implementation(ktor("server-test-host"))
     testImplementation(kotlin("test-junit"))
