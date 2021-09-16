@@ -11,4 +11,9 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
+
+    implementation(project(":common"))
+    implementation(project(":resume-ab-transport-main-mp"))
+
+    testImplementation(kotlin("test"))
 }
