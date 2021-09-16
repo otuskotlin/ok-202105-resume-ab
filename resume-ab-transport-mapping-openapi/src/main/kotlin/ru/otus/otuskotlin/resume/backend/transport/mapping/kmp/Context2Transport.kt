@@ -31,7 +31,9 @@ private fun ResumeModel.toTransport() = ResponseResume(
     ownerId = ownerId.takeIf { it != OwnerIdModel.NONE }?.asString(),
     birthDate = birthDate.takeIf { it.isNotBlank() },
     gender = gender.takeIf { it != ResumeGenderModel.NONE }?.let { ResponseResume.Gender.valueOf(it.name) },
-    visibility = visibility.takeIf { it != ResumeVisibilityModel.NONE }?.let { ResumeVisibility.valueOf(it.name) }
+    visibility = visibility.takeIf { it != ResumeVisibilityModel.NONE }?.let { ResumeVisibility.valueOf(it.name) },
+    permissions = permissions.takeIf { it.isNotEmpty() }?.filter { it != PermissionsModel.NONE }
+        ?.map { ResumePermissions.valueOf(it.name) }?.toSet(),
 )
 fun ResumeContext.toCreateResponse() = CreateResumeResponse(
     requestId = onRequest.takeIf { it.isNotBlank() },

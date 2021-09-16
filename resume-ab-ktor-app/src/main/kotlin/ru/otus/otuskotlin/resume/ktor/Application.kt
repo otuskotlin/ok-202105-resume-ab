@@ -7,6 +7,7 @@ import io.ktor.features.*
 import io.ktor.http.*
 import io.ktor.http.content.*
 import io.ktor.jackson.*
+import io.ktor.response.*
 import io.ktor.routing.*
 import org.koin.ktor.ext.Koin
 import org.koin.ktor.ext.inject
@@ -23,7 +24,7 @@ fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 @Suppress("UNUSED_PARAMETER")
 @JvmOverloads
-fun Application.module() {
+fun Application.module(testing: Boolean = false) {
     val resumeService by inject<ResumeService>()
 
     install(DefaultHeaders)
@@ -53,6 +54,9 @@ fun Application.module() {
     install(Routing)
 
     routing {
+        get("/") {
+            call.respondText ("Hello World")
+        }
         route("resume") {
             post("create") {
                 call.createResume(resumeService)

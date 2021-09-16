@@ -10,7 +10,7 @@ class ResumeServiceImpl : ResumeService {
     override fun createResume(context: ResumeContext): ResumeContext {
         val requestCreateResume = context.requestResume
         return context.apply {
-            responseResume = requestCreateResume
+            responseResume = Ivan.getModel()
         }
     }
 
