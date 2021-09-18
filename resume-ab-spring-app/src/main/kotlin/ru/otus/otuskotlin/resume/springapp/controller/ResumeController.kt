@@ -1,44 +1,70 @@
 package ru.otus.otuskotlin.resume.springapp.controller
 
+import kotlinx.coroutines.runBlocking
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import ru.otus.otuskotlin.resume.backend.common.context.ResumeContext
-import ru.otus.otuskotlin.resume.backend.transport.mapping.kmp.*
 import ru.otus.otuskotlin.resume.openapi.models.*
-import ru.otus.otuskotlin.resume.springapp.service.ResumeService
+import ru.otus.otuskotlin.resume.service.services.ResumeServiceImpl
+import java.time.Instant
 
 @RestController
 @RequestMapping("/resume")
 class ResumeController (
-    private val resumeService: ResumeService
+    private val resumeService: ResumeServiceImpl
         ){
 
     @PostMapping("create")
-    fun createResume (@RequestBody createResumeRequest: CreateResumeRequest):
+    fun createResume (@RequestBody request: CreateResumeRequest):
             CreateResumeResponse {
-        val context = ResumeContext().setQuery(createResumeRequest)
-        return resumeService.createResume(context).toCreateResponse()
+        val context = ResumeContext(
+            startTime = Instant.now()
+        )
+        return try {
+            runBlocking { resumeService.createResume(context, request) }
+        } catch (e: Exception) {
+            return resumeService.error(context, e) as CreateResumeResponse
+        }
     }
 
     @PostMapping("read")
-    fun readResume(@RequestBody readResumeRequest: ReadResumeRequest) =
-        ResumeContext().setQuery(readResumeRequest).let {
-            resumeService.readResume(it)
-        }.toReadResponse()
+    fun readResume(@RequestBody request: ReadResumeRequest):
+            ReadResumeResponse {
+        val context = ResumeContext(
+            startTime = Instant.now()
+        )
+        return try {
+            runBlocking { resumeService.readResume(context, request) }
+        } catch (e: Exception) {
+            return resumeService.error(context, e) as ReadResumeResponse
+        }
+    }
 
     @PostMapping("update")
-    fun updateResume(@RequestBody updateResumeRequest: UpdateResumeRequest): UpdateResumeResponse {
-        return ResumeContext().setQuery(updateResumeRequest).let {
-            resumeService.updateResume(it)
-        }.toUpdateResponse()
+    fun updateResume(@RequestBody request: UpdateResumeRequest):
+            UpdateResumeResponse {
+        val context = ResumeContext(
+            startTime = Instant.now()
+        )
+        return try {
+            runBlocking { resumeService.updateResume(context, request) }
+        } catch (e: Exception) {
+            return resumeService.error(context, e) as UpdateResumeResponse
+        }
     }
 
     @PostMapping("delete")
-    fun deleteResume(@RequestBody deleteResumeRequest: DeleteResumeRequest): DeleteResumeResponse {
-        return ResumeContext().setQuery(deleteResumeRequest).let {
-            resumeService.deleteResume(it)
-        }.toDeleteResponse()
+    fun deleteResume(@RequestBody request: DeleteResumeRequest):
+            DeleteResumeResponse {
+        val context = ResumeContext(
+            startTime = Instant.now()
+        )
+        return try {
+            runBlocking { resumeService.deleteResume(context, request) }
+        } catch (e: Exception) {
+            return resumeService.error(context, e) as DeleteResumeResponse
+        }
     }
 }

@@ -9,6 +9,7 @@ plugins {
 }
 
 val kotestVersion = "4.6.1"
+val coroutinesVersion: String by project
 group = rootProject.group
 version = rootProject.version
 java.sourceCompatibility = JavaVersion.VERSION_11
@@ -19,7 +20,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin") // from models to json and Vice versa
     implementation("org.jetbrains.kotlin:kotlin-reflect") // for spring-boot app
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8") // for spring-boot app
-
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
     // tests
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
@@ -30,7 +31,9 @@ dependencies {
     implementation(project(":common"))
     implementation(project(":resume-ab-transport-main-openapi"))
     implementation(project(":resume-ab-transport-mapping-openapi"))
-    implementation(project(":resume-ab-stubs"))
+
+    //service
+    implementation(project(":resume-ab-service-openapi"))
 }
 
 tasks.withType<KotlinCompile> {

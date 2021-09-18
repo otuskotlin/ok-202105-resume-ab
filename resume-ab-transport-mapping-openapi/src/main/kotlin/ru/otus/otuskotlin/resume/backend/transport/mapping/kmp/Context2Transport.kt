@@ -1,6 +1,7 @@
 package ru.otus.otuskotlin.resume.backend.transport.mapping.kmp
 
 import ru.otus.otuskotlin.resume.backend.common.context.ResumeContext
+import ru.otus.otuskotlin.resume.backend.common.exceptions.ResumeOperationNotSet
 import ru.otus.otuskotlin.resume.backend.common.models.*
 import ru.otus.otuskotlin.resume.openapi.models.*
 
@@ -58,3 +59,12 @@ fun ResumeContext.toDeleteResponse() = DeleteResumeResponse(
     result = if (errors.find { it.level == IError.Level.ERROR } == null) DeleteResumeResponse.Result.SUCCESS
     else DeleteResumeResponse.Result.ERROR
 )
+
+fun ResumeContext.toResponse() = when(operation) {
+    ResumeContext.ResumeOperations.INIT -> toInitResponse()
+    ResumeContext.ResumeOperations.CREATE -> toCreateResponse()
+    ResumeContext.ResumeOperations.READ -> toReadResponse()
+    ResumeContext.ResumeOperations.UPDATE -> toUpdateResponse()
+    ResumeContext.ResumeOperations.DELETE -> toDeleteResponse()
+    ResumeContext.ResumeOperations.NONE -> throw ResumeOperationNotSet("Operation for error response is not set")
+}
