@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import ru.otus.otuskotlin.resume.backend.common.context.ResumeContext
 import ru.otus.otuskotlin.resume.openapi.models.*
-import ru.otus.otuskotlin.resume.service.services.ResumeServiceImpl
+import ru.otus.otuskotlin.resume.service.services.ResumeService
 import java.time.Instant
 
 @RestController
 @RequestMapping("/resume")
 class ResumeController (
-    private val resumeService: ResumeServiceImpl
+    private val resumeService: ResumeService
         ){
 
     @PostMapping("create")

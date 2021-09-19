@@ -2,10 +2,10 @@ package ru.otus.otuskotlin.resume.springapp.configs
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import ru.otus.otuskotlin.resume.service.services.ResumeServiceImpl
+import ru.otus.otuskotlin.resume.service.services.ResumeService
 
 @Configuration
 class ServiceConfig {
     @Bean
-    fun resumeService(): ResumeServiceImpl = ResumeServiceImpl()
+    fun resumeService(): ResumeService = ResumeService()
 }

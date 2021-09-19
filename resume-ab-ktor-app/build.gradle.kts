@@ -54,6 +54,8 @@ dependencies {
     implementation(project(":common"))
     implementation(project(":resume-ab-transport-main-openapi"))
     implementation(project(":resume-ab-transport-mapping-openapi"))
+    //service
+    implementation(project(":resume-ab-service-openapi"))
     //stubs
     implementation(project(":resume-ab-stubs"))
 }

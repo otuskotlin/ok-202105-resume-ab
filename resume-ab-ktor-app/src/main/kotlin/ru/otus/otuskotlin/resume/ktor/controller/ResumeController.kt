@@ -5,50 +5,71 @@ import io.ktor.request.*
 import io.ktor.response.*
 import ru.otus.otuskotlin.resume.backend.common.context.ResumeContext
 import ru.otus.otuskotlin.resume.backend.transport.mapping.kmp.*
-import ru.otus.otuskotlin.resume.ktor.service.ResumeService
 import ru.otus.otuskotlin.resume.openapi.models.*
+import ru.otus.otuskotlin.resume.service.services.ResumeService
+import java.time.Instant
 
 suspend fun ApplicationCall.initResume(resumeService: ResumeService) {
-    val initResumeRequest = receive<InitResumeRequest>()
-    respond(
-        ResumeContext().setQuery(initResumeRequest).let {
-            resumeService.readResume(it)
-        }.toInitResponse()
+    val request = receive<InitResumeRequest>()
+    val context = ResumeContext(
+        startTime = Instant.now()
     )
+    val result = try {
+        resumeService.initResume(context, request)
+    } catch (e: Throwable) {
+        resumeService.error(context, e) as InitResumeResponse
+    }
+    respond(result)
 }
 
 suspend fun ApplicationCall.createResume(resumeService: ResumeService) {
-    val createResumeRequest = receive<CreateResumeRequest>()
-    respond(
-        ResumeContext().setQuery(createResumeRequest).let {
-            resumeService.createResume(it)
-        }.toCreateResponse()
+    val request = receive<CreateResumeRequest>()
+    val context = ResumeContext(
+        startTime = Instant.now()
     )
+    val result = try {
+        resumeService.createResume(context, request)
+    } catch (e: Throwable) {
+        resumeService.error(context, e) as CreateResumeResponse
+    }
+    respond(result)
 }
 
 suspend fun ApplicationCall.readResume(resumeService: ResumeService) {
-    val readResumeRequest = receive<ReadResumeRequest>()
-    respond(
-        ResumeContext().setQuery(readResumeRequest).let {
-            resumeService.readResume(it)
-        }.toReadResponse()
+    val request = receive<ReadResumeRequest>()
+    val context = ResumeContext(
+        startTime = Instant.now()
     )
+    val result = try {
+        resumeService.readResume(context, request)
+    } catch (e: Throwable) {
+        resumeService.error(context, e) as ReadResumeResponse
+    }
+    respond(result)
 }
 
 suspend fun ApplicationCall.updateResume(resumeService: ResumeService) {
-    val updateResumeRequest = receive<UpdateResumeRequest>()
-    respond(
-        ResumeContext().setQuery(updateResumeRequest).let {
-            resumeService.updateResume(it)
-        }.toUpdateResponse()
+    val request = receive<UpdateResumeRequest>()
+    val context = ResumeContext(
+        startTime = Instant.now()
     )
+    val result = try {
+        resumeService.updateResume(context,request)
+    } catch (e: Throwable) {
+        resumeService.error(context, e) as UpdateResumeResponse
+    }
+    respond(result)
 }
 
 suspend fun ApplicationCall.deleteResume(resumeService: ResumeService) {
-    val deleteResumeRequest = receive<DeleteResumeRequest>()
-    respond(
-        ResumeContext().setQuery(deleteResumeRequest).let {
-            resumeService.deleteResume(it)
-        }.toDeleteResponse()
+    val request = receive<DeleteResumeRequest>()
+    val context = ResumeContext(
+        startTime = Instant.now()
     )
+    val result = try {
+        resumeService.deleteResume(context,request)
+    } catch (e: Throwable) {
+        resumeService.error(context, e) as DeleteResumeResponse
+    }
+    respond(result)
 }

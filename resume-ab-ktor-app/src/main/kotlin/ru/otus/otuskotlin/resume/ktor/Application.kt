@@ -9,30 +9,24 @@ import io.ktor.http.content.*
 import io.ktor.jackson.*
 import io.ktor.response.*
 import io.ktor.routing.*
-import org.koin.ktor.ext.Koin
-import org.koin.ktor.ext.inject
-import org.koin.logger.slf4jLogger
+import io.ktor.server.netty.*
 import ru.otus.otuskotlin.resume.ktor.controller.createResume
 import ru.otus.otuskotlin.resume.ktor.controller.deleteResume
 import ru.otus.otuskotlin.resume.ktor.controller.readResume
 import ru.otus.otuskotlin.resume.ktor.controller.updateResume
-import ru.otus.otuskotlin.resume.ktor.modules.resume
-import ru.otus.otuskotlin.resume.ktor.service.ResumeService
-import ru.otus.otuskotlin.resume.ktor.service.ResumeServiceImpl
+import ru.otus.otuskotlin.resume.service.services.ResumeService
 
-fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
+fun main(args: Array<String>): Unit = EngineMain.main(args)
 
 @Suppress("UNUSED_PARAMETER")
 @JvmOverloads
 fun Application.module(testing: Boolean = false) {
-    val resumeService by inject<ResumeService>()
+    val resumeService = ResumeService()
 
     install(DefaultHeaders)
     install(CallLogging)
     install(AutoHeadResponse)
-    install(Koin) {
-        modules(resume)
-    }
+
     install(ContentNegotiation) {
         jackson {
             enable(SerializationFeature.INDENT_OUTPUT)

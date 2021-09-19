@@ -5,7 +5,13 @@ import ru.otus.otuskotlin.resume.backend.common.context.ResumeContext
 import ru.otus.otuskotlin.resume.backend.transport.mapping.kmp.*
 import ru.otus.otuskotlin.resume.openapi.models.*
 
-class ResumeServiceImpl {
+class ResumeService {
+    fun initResume(context: ResumeContext, request: InitResumeRequest): InitResumeResponse {
+        context.setQuery(request)
+        context.responseResume = Ivan.getModel()
+        return context.toInitResponse()
+    }
+
     fun createResume(context: ResumeContext, request: CreateResumeRequest): CreateResumeResponse {
         context.setQuery(request)
         context.responseResume = Ivan.getModel()
