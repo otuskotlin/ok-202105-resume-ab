@@ -5,6 +5,7 @@ val jacksonVersion: String by project
 val lambdaCoreVersion: String by project
 val lambdaLog4jVersion: String by project
 val lambdaEventsVersion: String by project
+val coroutinesVersion: String by project
 
 plugins {
     kotlin("jvm")
@@ -27,6 +28,8 @@ dependencies {
     implementation(project(":resume-ab-transport-mapping-openapi"))
     //stubs
     implementation(project(":resume-ab-stubs"))
+    //service
+    implementation(project(":resume-ab-service-openapi"))
 
     implementation("com.amazonaws:aws-lambda-java-core:$lambdaCoreVersion")
     implementation("com.amazonaws:aws-lambda-java-log4j:$lambdaLog4jVersion")
@@ -36,6 +39,9 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
     implementation("com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+
 }
 
 tasks.withType<KotlinCompile> {
