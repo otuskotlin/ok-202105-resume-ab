@@ -3,7 +3,10 @@ package ru.otus.otuskotlin.resume.backend.transport.mapping.kmp
 import org.junit.Test
 import ru.otus.otuskotlin.resume.backend.common.context.ResumeContext
 import ru.otus.otuskotlin.resume.backend.common.models.*
-import ru.otus.otuskotlin.resume.mp.models.*
+import ru.otus.otuskotlin.resume.openapi.models.ResumeVisibility
+import ru.otus.otuskotlin.resume.openapi.models.UpdatableResume
+import ru.otus.otuskotlin.resume.openapi.models.UpdateResumeRequest
+import ru.otus.otuskotlin.resume.openapi.models.UpdateResumeResponse
 import kotlin.test.assertEquals
 
 class MappingTest {

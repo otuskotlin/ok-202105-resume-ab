@@ -8,7 +8,7 @@ data class ResumeModel(
     var age: String = "",
     var birthDate: String = "",
     var gender: ResumeGenderModel = ResumeGenderModel.NONE,
-    val ownerId: OwnerIdModel = OwnerIdModel.NONE,
-    val visibility: ResumeVisibilityModel = ResumeVisibilityModel.NONE,
+    var ownerId: OwnerIdModel = OwnerIdModel.NONE,
+    var visibility: ResumeVisibilityModel = ResumeVisibilityModel.NONE,
     var permissions: MutableSet<PermissionsModel> = mutableSetOf()
 )

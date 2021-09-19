@@ -2,7 +2,14 @@ package ru.otus.otuskotlin.resume.backend.common.models
 
 
 data class CommonErrorModel(
-    override val field: String = "",
-    override val level: IError.Level = IError.Level.ERROR,
-    override val message: String = "",
-) : IError
+    override var field: String = "",
+    override var level: IError.Level = IError.Level.ERROR,
+    override var message: String = "",
+    override var stackTrace: IError.StackTrace = IError.StackTrace.NONE,
+) : IError {
+    fun from(e: Throwable, level: IError.Level = IError.Level.ERROR) {
+        this.level = level
+        message = e.message ?: ""
+        stackTrace = IError.StackTrace(e.stackTrace)
+    }
+}

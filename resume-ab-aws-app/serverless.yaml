@@ -1,0 +1,28 @@
+service: resume-ab
+
+provider:
+  name: aws
+  runtime: java11
+  lambdaHashingVersion: 20201221
+
+package:
+  artifact: ${env:ARTIFACT}
+
+functions:
+  createResume:
+    handler: ru.otus.otuskotlin.resume.aws.CreateResumeHandler
+    events:
+      - http: post /resume/create
+  readResume:
+    handler: ru.otus.otuskotlin.resume.aws.ReadResumeHandler
+    events:
+      - http: post /resume/read
+  updateResume:
+    handler: ru.otus.otuskotlin.resume.aws.UpdateResumeHandler
+    events:
+      - http: post /resume/update
+  deleteResume:
+    handler: ru.otus.otuskotlin.resume.aws.DeleteResumeHandler
+    events:
+      - http: post /resume/delete
+

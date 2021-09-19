@@ -2,7 +2,7 @@ package ru.otus.otuskotlin.resume.backend.transport.mapping.kmp
 
 import ru.otus.otuskotlin.resume.backend.common.context.ResumeContext
 import ru.otus.otuskotlin.resume.backend.common.models.*
-import ru.otus.otuskotlin.resume.mp.models.*
+import ru.otus.otuskotlin.resume.openapi.models.*
 
 private fun CreatableResume.toModel() = ResumeModel(
     lastName = lastName?:"",
@@ -38,7 +38,7 @@ fun ResumeContext.setQuery(query: CreateResumeRequest) = apply {
 
 fun ResumeContext.setQuery(query: ReadResumeRequest) = apply {
     onRequest = query.requestId?:""
-    requestResumeId = ResumeIdModel(query.readresumeId?:"")
+    requestResumeId = ResumeIdModel(query.readResumeId?:"")
 }
 
 fun ResumeContext.setQuery(query: UpdateResumeRequest) = apply {
