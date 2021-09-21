@@ -1,6 +1,7 @@
 package ru.otus.otuskotlin.resume.cor
 
 import ru.otus.otuskotlin.resume.cor.handlers.CorChainDsl
+import ru.otus.otuskotlin.resume.cor.handlers.CorWorkerDsl
 
 
 interface ICorExecDsl<T> {
@@ -45,4 +46,5 @@ interface ICorHandlerDsl<T> {
 }
 
 fun <T> chain(function: CorChainDsl<T>.() -> Unit) = CorChainDsl<T>().apply(function)
+fun <T> worker(function: CorWorkerDsl<T>.() -> Unit) = CorWorkerDsl<T>().apply(function)
 

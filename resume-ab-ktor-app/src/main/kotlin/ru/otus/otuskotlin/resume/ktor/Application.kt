@@ -14,6 +14,7 @@ import ru.otus.otuskotlin.resume.ktor.controller.createResume
 import ru.otus.otuskotlin.resume.ktor.controller.deleteResume
 import ru.otus.otuskotlin.resume.ktor.controller.readResume
 import ru.otus.otuskotlin.resume.ktor.controller.updateResume
+import ru.otus.otuskotlin.resume.logics.ResumeCrud
 import ru.otus.otuskotlin.resume.service.services.ResumeService
 
 fun main(args: Array<String>): Unit = EngineMain.main(args)
@@ -21,7 +22,8 @@ fun main(args: Array<String>): Unit = EngineMain.main(args)
 @Suppress("UNUSED_PARAMETER")
 @JvmOverloads
 fun Application.module(testing: Boolean = false) {
-    val resumeService = ResumeService()
+    val crud = ResumeCrud()
+    val resumeService = ResumeService(crud)
 
     install(DefaultHeaders)
     install(CallLogging)

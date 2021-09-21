@@ -34,19 +34,29 @@ fun ResumeContext.setQuery(query: InitResumeRequest) = apply {
 fun ResumeContext.setQuery(query: CreateResumeRequest) = apply {
     onRequest = query.requestId?:""
     requestResume = query.createResume?.toModel()?: ResumeModel()
+    stubCase = query.debug?.stubCase.toModel()
 }
 
 fun ResumeContext.setQuery(query: ReadResumeRequest) = apply {
     onRequest = query.requestId?:""
     requestResumeId = ResumeIdModel(query.readResumeId?:"")
+    stubCase = query.debug?.stubCase.toModel()
 }
 
 fun ResumeContext.setQuery(query: UpdateResumeRequest) = apply {
     onRequest = query.requestId?:""
     requestResume = query.createResume?.toModel()?: ResumeModel()
+    stubCase = query.debug?.stubCase.toModel()
 }
 
 fun ResumeContext.setQuery(query: DeleteResumeRequest) = apply {
     onRequest = query.requestId?:""
     requestResumeId = ResumeIdModel(query.deleteResumeId?:"")
+    stubCase = query.debug?.stubCase.toModel()
+}
+
+private fun BaseDebugRequest.StubCase?.toModel() = when(this) {
+    BaseDebugRequest.StubCase.SUCCESS -> ResumeStubCase.SUCCESS
+    BaseDebugRequest.StubCase.DATABASE_ERROR -> ResumeStubCase.DATABASE_ERROR
+    null -> ResumeStubCase.NONE
 }

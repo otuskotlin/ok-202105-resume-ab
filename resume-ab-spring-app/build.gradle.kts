@@ -34,6 +34,8 @@ dependencies {
 
     //service
     implementation(project(":resume-ab-service-openapi"))
+    //logics
+    implementation(project(":resume-ab-logics"))
 }
 
 tasks.withType<KotlinCompile> {

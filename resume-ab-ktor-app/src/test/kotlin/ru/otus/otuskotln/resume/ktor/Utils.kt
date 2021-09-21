@@ -20,7 +20,10 @@ object Utils {
         }
     }
 
-    val  stubDebug = BaseDebugRequest(mode = BaseDebugRequest.Mode.STUB)
+    val stubDebugSuccess = BaseDebugRequest(
+        mode = BaseDebugRequest.Mode.STUB,
+        stubCase = BaseDebugRequest.StubCase.SUCCESS
+    )
 
     val stubResponseResume = ResponseResume(
         firstName = Ivan.getModel().firstName,
@@ -35,15 +38,26 @@ object Utils {
         permissions = Ivan.getModel().permissions.map { ResumePermissions.valueOf(it.toString()) }.toSet()
     )
 
-    val stubUpdatableResume = UpdatableResume (
+    val stubUpdatableResume = UpdatableResume(
         firstName = stubResponseResume.firstName,
         lastName = stubResponseResume.lastName,
         middleName = stubResponseResume.middleName,
         age = stubResponseResume.age,
         birthDate = stubResponseResume.birthDate,
-        gender = UpdatableResume.Gender.valueOf(stubResponseResume.gender?.let{ it.name } ?: "none"),
+        gender = UpdatableResume.Gender.valueOf(stubResponseResume.gender?.let { it.name } ?: "none"),
         ownerId = stubResponseResume.ownerId,
         visibility = stubResponseResume.visibility,
         id = stubResponseResume.id
-            )
+    )
+
+    val stubCreatableResume = CreatableResume(
+        firstName = stubResponseResume.firstName,
+        lastName = stubResponseResume.lastName,
+        middleName = stubResponseResume.middleName,
+        age = stubResponseResume.age,
+        birthDate = stubResponseResume.birthDate,
+        gender = CreatableResume.Gender.valueOf(stubResponseResume.gender?.let { it.name } ?: "none"),
+        ownerId = stubResponseResume.ownerId,
+        visibility = stubResponseResume.visibility,
+    )
 }

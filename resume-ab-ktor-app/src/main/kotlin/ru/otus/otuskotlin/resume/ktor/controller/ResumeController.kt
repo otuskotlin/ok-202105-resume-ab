@@ -12,7 +12,8 @@ import java.time.Instant
 suspend fun ApplicationCall.initResume(resumeService: ResumeService) {
     val request = receive<InitResumeRequest>()
     val context = ResumeContext(
-        startTime = Instant.now()
+        startTime = Instant.now(),
+        operation = ResumeContext.ResumeOperations.INIT
     )
     val result = try {
         resumeService.initResume(context, request)
@@ -25,7 +26,8 @@ suspend fun ApplicationCall.initResume(resumeService: ResumeService) {
 suspend fun ApplicationCall.createResume(resumeService: ResumeService) {
     val request = receive<CreateResumeRequest>()
     val context = ResumeContext(
-        startTime = Instant.now()
+        startTime = Instant.now(),
+        operation = ResumeContext.ResumeOperations.CREATE
     )
     val result = try {
         resumeService.createResume(context, request)
@@ -38,7 +40,8 @@ suspend fun ApplicationCall.createResume(resumeService: ResumeService) {
 suspend fun ApplicationCall.readResume(resumeService: ResumeService) {
     val request = receive<ReadResumeRequest>()
     val context = ResumeContext(
-        startTime = Instant.now()
+        startTime = Instant.now(),
+        operation = ResumeContext.ResumeOperations.READ
     )
     val result = try {
         resumeService.readResume(context, request)
@@ -51,7 +54,8 @@ suspend fun ApplicationCall.readResume(resumeService: ResumeService) {
 suspend fun ApplicationCall.updateResume(resumeService: ResumeService) {
     val request = receive<UpdateResumeRequest>()
     val context = ResumeContext(
-        startTime = Instant.now()
+        startTime = Instant.now(),
+        operation = ResumeContext.ResumeOperations.UPDATE
     )
     val result = try {
         resumeService.updateResume(context,request)
@@ -64,7 +68,8 @@ suspend fun ApplicationCall.updateResume(resumeService: ResumeService) {
 suspend fun ApplicationCall.deleteResume(resumeService: ResumeService) {
     val request = receive<DeleteResumeRequest>()
     val context = ResumeContext(
-        startTime = Instant.now()
+        startTime = Instant.now(),
+        operation = ResumeContext.ResumeOperations.DELETE
     )
     val result = try {
         resumeService.deleteResume(context,request)
