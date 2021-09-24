@@ -18,6 +18,8 @@ dependencies {
     //transport
     implementation(project(":common"))
     implementation(project(":resume-ab-common-cor"))
+    //validation
+    implementation(project(":resume-ab-validation"))
     //stubs
     implementation(project(":resume-ab-stubs"))
 
