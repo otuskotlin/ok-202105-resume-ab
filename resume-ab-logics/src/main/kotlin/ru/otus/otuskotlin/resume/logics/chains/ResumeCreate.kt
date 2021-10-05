@@ -19,6 +19,8 @@ object ResumeCreate : ICorExec<ResumeContext> by chain<ResumeContext>({
 
     chainInitWorker(title = "Инициализация чейна")
 
+    resumeCreateStub(title = "Обработка стабкейса для CREATE")
+
     validation {
         errorHandler { validationResult ->
             if (validationResult.isSuccess) return@errorHandler
@@ -35,7 +37,6 @@ object ResumeCreate : ICorExec<ResumeContext> by chain<ResumeContext>({
         }
     }
 
-    resumeCreateStub(title = "Обработка стабкейса для CREATE")
 
     // TODO: продовая логика, работа с БД
 

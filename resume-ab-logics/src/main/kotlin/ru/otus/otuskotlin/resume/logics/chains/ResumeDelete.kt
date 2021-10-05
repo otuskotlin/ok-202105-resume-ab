@@ -19,6 +19,8 @@ object ResumeDelete : ICorExec<ResumeContext> by chain<ResumeContext> ({
 
     chainInitWorker(title = "Инициализация чейна")
 
+    resumeDeleteStub(title = "Обработка стабкейса для DELETE")
+
     validation {
         errorHandler { validationResult ->
             if (validationResult.isSuccess) return@errorHandler
@@ -34,8 +36,6 @@ object ResumeDelete : ICorExec<ResumeContext> by chain<ResumeContext> ({
             validator(ValidatorStringNonEmpty())
         }
     }
-
-    resumeDeleteStub(title = "Обработка стабкейса для DELETE")
 
     // TODO: продовая логика, работа с БД
 

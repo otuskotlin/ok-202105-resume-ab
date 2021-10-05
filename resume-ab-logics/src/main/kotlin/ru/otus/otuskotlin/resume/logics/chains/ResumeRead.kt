@@ -19,6 +19,8 @@ object ResumeRead : ICorExec<ResumeContext> by chain<ResumeContext> ({
 
     chainInitWorker(title = "Инициализация чейна")
 
+    resumeReadStub(title = "Обработка стабкейса для READ")
+
     validation {
         errorHandler { validationResult ->
             if (validationResult.isSuccess) return@errorHandler
@@ -34,8 +36,6 @@ object ResumeRead : ICorExec<ResumeContext> by chain<ResumeContext> ({
             validator(ValidatorStringNonEmpty())
         }
     }
-
-    resumeReadStub(title = "Обработка стабкейса для READ")
 
     // TODO: продовая логика, работа с БД
 

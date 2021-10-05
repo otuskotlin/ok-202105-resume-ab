@@ -5,6 +5,7 @@ import org.junit.Test
 import resume.stubs.Ivan
 import ru.otus.otuskotlin.resume.backend.common.context.CorStatus
 import ru.otus.otuskotlin.resume.backend.common.context.ResumeContext
+import ru.otus.otuskotlin.resume.backend.common.models.IError
 import ru.otus.otuskotlin.resume.backend.common.models.ResumeIdModel
 import ru.otus.otuskotlin.resume.backend.common.models.ResumeStubCase
 import java.time.Instant
@@ -31,7 +32,7 @@ class ResumeCrudValidationTest {
             crud.create(context)
         }
         assertEquals(CorStatus.ERROR, context.status)
-        assertNotNull(context.errors.find { it.message == "String must not be empty" })
+        assertNotNull(context.errors.find { it.level == IError.Level.ERROR })
     }
 
     @Test

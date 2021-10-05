@@ -19,6 +19,8 @@ object ResumeUpdate : ICorExec<ResumeContext> by chain<ResumeContext> ({
 
     chainInitWorker(title = "Инициализация чейна")
 
+    resumeUpdateStub(title = "Обработка стабкейса для UPDATE")
+
     validation {
         errorHandler { validationResult ->
             if (validationResult.isSuccess) return@errorHandler
@@ -34,8 +36,6 @@ object ResumeUpdate : ICorExec<ResumeContext> by chain<ResumeContext> ({
             validator(ValidatorStringNonEmpty())
         }
     }
-
-    resumeUpdateStub(title = "Обработка стабкейса для UPDATE")
 
     // TODO: продовая логика, работа с БД
 
