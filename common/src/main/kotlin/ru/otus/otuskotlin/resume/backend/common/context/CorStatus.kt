@@ -2,8 +2,9 @@ package ru.otus.otuskotlin.resume.backend.common.context
 
 enum class CorStatus {
     NONE,
-    STARTED,
-    FINISHED,
+    RUNNING,
+    FINISHING,
     SUCCESS,
-    FAILING;
+    FAILING,
+    ERROR;
 }
