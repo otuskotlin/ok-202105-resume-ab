@@ -32,7 +32,7 @@ object ResumeUpdate : ICorExec<ResumeContext> by chain<ResumeContext> ({
         }
 
         validate<String?> {
-            on {this.requestResume.id.id}
+            on {this.requestResume.id.asString()}
             validator(ValidatorStringNonEmpty())
         }
     }

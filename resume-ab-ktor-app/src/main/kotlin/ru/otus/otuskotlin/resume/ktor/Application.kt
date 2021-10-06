@@ -2,6 +2,7 @@ package ru.otus.otuskotlin.resume.ktor
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.SerializationFeature
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.http.*
@@ -10,10 +11,8 @@ import io.ktor.jackson.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.server.netty.*
-import ru.otus.otuskotlin.resume.ktor.controller.createResume
-import ru.otus.otuskotlin.resume.ktor.controller.deleteResume
-import ru.otus.otuskotlin.resume.ktor.controller.readResume
-import ru.otus.otuskotlin.resume.ktor.controller.updateResume
+import io.ktor.websocket.*
+import ru.otus.otuskotlin.resume.ktor.controller.*
 import ru.otus.otuskotlin.resume.logics.ResumeCrud
 import ru.otus.otuskotlin.resume.service.services.ResumeService
 
@@ -24,6 +23,8 @@ fun main(args: Array<String>): Unit = EngineMain.main(args)
 fun Application.module(testing: Boolean = false) {
     val crud = ResumeCrud()
     val resumeService = ResumeService(crud)
+    val userSessions = mutableSetOf<KtorUserSession>()
+    val objectMapper = jacksonObjectMapper()
 
     install(DefaultHeaders)
     install(CallLogging)
@@ -49,6 +50,8 @@ fun Application.module(testing: Boolean = false) {
 
     install(Routing)
 
+    install(WebSockets)
+
     routing {
         get("/") {
             call.respondText ("Hello World")
@@ -68,6 +71,9 @@ fun Application.module(testing: Boolean = false) {
             }
             static("static") {
                 resources("static")
+            }
+            webSocket("/ws") {
+                this.handleSession(objectMapper, resumeService, userSessions)
             }
         }
     }
