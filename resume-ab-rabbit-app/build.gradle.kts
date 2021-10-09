@@ -1,6 +1,8 @@
 val rabbitVersion: String by project
 val jacksonVersion: String by project
 val coroutinesVersion: String by project
+val logbackVersion: String by project
+val testContainersVersion: String by project
 
 plugins {
     kotlin("jvm")
@@ -18,6 +20,7 @@ dependencies {
     implementation("com.rabbitmq:amqp-client:$rabbitVersion")
     implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+    implementation("ch.qos.logback:logback-classic:$logbackVersion")
 
     //transport
     implementation(project(":common"))
@@ -25,5 +28,12 @@ dependencies {
     implementation(project(":resume-ab-transport-mapping-openapi"))
     //service
     implementation(project(":resume-ab-service-openapi"))
+    //
+    implementation(project(":resume-ab-logics"))
+    //stubs
+    implementation(project(":resume-ab-stubs"))
 
+
+    testImplementation("org.testcontainers:rabbitmq:$testContainersVersion")
+    testImplementation(kotlin("test"))
 }
