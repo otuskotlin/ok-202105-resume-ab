@@ -12,6 +12,22 @@ application {
     mainClass.set("ru.otus.otuskotlin.resume.kafka.MainKt")
 }
 
+docker {
+    javaApplication {
+        mainClassName.set(application.mainClass.get())
+        baseImage.set("adoptopenjdk/openjdk11:alpine-jre")
+//        ports.set(listOf(8080))
+        val imageName = project.name
+        images.set(
+            listOf(
+                "$imageName:${project.version}",
+                "$imageName:latest"
+            )
+        )
+        jvmArgs.set(listOf("-Xms256m", "-Xmx512m"))
+    }
+}
+
 dependencies {
     implementation("org.apache.kafka:kafka-clients:$kafkaVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
