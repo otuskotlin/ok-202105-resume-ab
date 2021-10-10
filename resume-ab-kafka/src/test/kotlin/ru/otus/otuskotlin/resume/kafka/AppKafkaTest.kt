@@ -35,8 +35,12 @@ class AppKafkaTest {
                         createResume = CreatableResume(
                             firstName = "Ivan",
                             lastName = "Ivanov",
+                            middleName = "Ivanovich",
                             ownerId = "345",
                             visibility = ResumeVisibility.OWNER_ONLY,
+                            birthDate = "2020-01-01",
+                            age = "1",
+                            gender = CreatableResume.Gender.MALE,
                         ),
                         debug = BaseDebugRequest(
                             mode = BaseDebugRequest.Mode.STUB,
@@ -69,4 +73,4 @@ class AppKafkaTest {
 
 private val om = ObjectMapper()
 private fun BaseMessage.toJson(): String = om.writeValueAsString(this)
-private inline fun <reified T: BaseMessage> String.fromJson() = om.readValue<T>(this, T::class.java)
+private inline fun <reified T : BaseMessage> String.fromJson() = om.readValue<T>(this, T::class.java)

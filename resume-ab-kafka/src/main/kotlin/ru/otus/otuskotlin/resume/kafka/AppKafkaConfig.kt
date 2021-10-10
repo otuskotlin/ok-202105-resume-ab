@@ -28,9 +28,9 @@ class AppKafkaConfig(
         const val KAFKA_GROUP_ID_VAR = "KAFKA_GROUP_ID"
 
         val KAFKA_HOSTS by lazy { (System.getenv(KAFKA_HOST_VAR) ?: "").split("\\s*[,;]\\s*") }
-        val KAFKA_TOPIC_IN by lazy { System.getenv(KAFKA_TOPIC_IN_VAR) ?: "marketplace-in" }
-        val KAFKA_TOPIC_OUT by lazy { System.getenv(KAFKA_TOPIC_OUT_VAR) ?: "marketplace-out" }
-        val KAFKA_GROUP_ID by lazy { System.getenv(KAFKA_GROUP_ID_VAR) ?: "marketplace" }
+        val KAFKA_TOPIC_IN by lazy { System.getenv(KAFKA_TOPIC_IN_VAR) ?: "resume-in" }
+        val KAFKA_TOPIC_OUT by lazy { System.getenv(KAFKA_TOPIC_OUT_VAR) ?: "resume-out" }
+        val KAFKA_GROUP_ID by lazy { System.getenv(KAFKA_GROUP_ID_VAR) ?: "resume" }
 
         fun kafkaConsumer(hosts: List<String>, groupId: String): KafkaConsumer<String, String> {
             val props = Properties().apply {
