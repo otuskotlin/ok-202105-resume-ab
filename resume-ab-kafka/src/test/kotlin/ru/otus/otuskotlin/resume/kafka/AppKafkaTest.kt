@@ -49,6 +49,9 @@ class AppKafkaTest {
                     ).toJson()
                 )
             )
+            println("================================================")
+            println("================================================")
+            println(consumer)
             app.stop()
         }
 
@@ -63,7 +66,7 @@ class AppKafkaTest {
         val message = producer.history().first()
         val result = message.value().fromJson<CreateResumeResponse>()
         assertEquals("123", result.requestId)
-//        assertEquals("Ivan", result.createdResume?.firstName)
+        assertEquals("Ivan", result.createdResume?.firstName)
     }
 
     companion object {
