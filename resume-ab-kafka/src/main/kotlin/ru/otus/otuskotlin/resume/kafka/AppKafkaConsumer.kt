@@ -27,12 +27,13 @@ class AppKafkaConsumer(private val config: AppKafkaConfig) {
         try {
             consumer.subscribe(listOf(config.kafkaTopicIn))
             while (process.get()) {
-                val ctx = ResumeContext(
-                    startTime = Instant.now()
-                )
+                var ctx = ResumeContext()
                 try {
                     val records: ConsumerRecords<String, String> = consumer.poll(Duration.ofSeconds(1))
                     records.forEach { record: ConsumerRecord<String, String> ->
+                        ctx = ResumeContext(
+                            startTime = Instant.now()
+                        )
                         val request = withContext(Dispatchers.IO) {
                             mapper.readValue(record.value(), BaseMessage::class.java)
                         }
