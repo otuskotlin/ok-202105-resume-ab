@@ -27,7 +27,9 @@ class AppKafkaConsumer(private val config: AppKafkaConfig) {
         try {
             consumer.subscribe(listOf(config.kafkaTopicIn))
             while (process.get()) {
-                var ctx = ResumeContext()
+                var ctx = ResumeContext(
+                    startTime = Instant.now()
+                )
                 try {
                     val records: ConsumerRecords<String, String> = consumer.poll(Duration.ofSeconds(1))
                     records.forEach { record: ConsumerRecord<String, String> ->
