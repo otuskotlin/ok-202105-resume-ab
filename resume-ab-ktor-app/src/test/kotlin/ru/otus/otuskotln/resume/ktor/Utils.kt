@@ -34,7 +34,7 @@ object Utils {
         gender = ResponseResume.Gender.valueOf(Ivan.getModel().gender.name),
         ownerId = Ivan.getModel().ownerId.id,
         visibility = ResumeVisibility.valueOf(Ivan.getModel().visibility.name),
-        id = Ivan.getModel().id.id,
+        id = Ivan.getModel().id.asString(),
         permissions = Ivan.getModel().permissions.map { ResumePermissions.valueOf(it.toString()) }.toSet()
     )
 

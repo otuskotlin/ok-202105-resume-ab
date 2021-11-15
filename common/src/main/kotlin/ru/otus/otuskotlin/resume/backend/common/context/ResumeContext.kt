@@ -8,6 +8,7 @@ data class ResumeContext(
     var operation: ResumeOperations = ResumeOperations.NONE,
     var stubCase: ResumeStubCase = ResumeStubCase.NONE,
 
+    val userSession: IUserSession<*> = EmptySession,
     var onRequest: String = "",
     var requestResumeId: ResumeIdModel = ResumeIdModel.NONE,
     var requestResume: ResumeModel = ResumeModel(),

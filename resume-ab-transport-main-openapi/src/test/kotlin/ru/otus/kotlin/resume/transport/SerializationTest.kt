@@ -16,26 +16,7 @@ class SerializationTest {
             middleName = "Ivanovich",
             age = "30",
             birthDate = "2000-01-01",
-            gender = ResumeGender.MALE,
-            area = ResumeArea.MOSCOW,
-            contact = listOf(ResumeContact(ResumeContact.Id.PHONE, "89996661020", true)),
-            experience = listOf(
-                ResumeExperience(
-                    ResumeExperience.ExperienceType.EDUCATION,
-                    name = "Otus",
-                    url = "https://otus.ru/learning/115149/",
-                    position = "student",
-                    start = "",
-                    end = "",
-                    description = "",
-                    skillDuties = listOf(
-                        ResumeSkill(
-                        ResumeSkill.Id.KOTLIN,
-                        "освоение основ Kotlin"
-                    )
-                    )
-                ))
-
+            gender = CreatableResume.Gender.MALE,
         )
     )
 
