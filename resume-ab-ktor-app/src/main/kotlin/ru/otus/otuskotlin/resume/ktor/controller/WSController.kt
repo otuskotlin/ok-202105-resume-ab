@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import io.ktor.http.cio.websocket.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.channels.ClosedReceiveChannelException
 import kotlinx.coroutines.withContext
 import ru.otus.otuskotlin.resume.backend.common.context.ResumeContext
@@ -73,7 +74,7 @@ suspend fun serverRequest(request: BaseMessage?, userSession: KtorUserSession, r
             else -> throw UnsupportedOperationException("Unsupported request type")
         }
     } catch (e: Exception) {
-        resumeService.error(context, e)
+        withContext(NonCancellable) {resumeService.error(context, e)}
     }
 }
 

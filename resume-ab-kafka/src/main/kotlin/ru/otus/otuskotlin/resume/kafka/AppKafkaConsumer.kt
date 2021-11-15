@@ -42,7 +42,9 @@ class AppKafkaConsumer(private val config: AppKafkaConfig) {
                         sendResponse(service.handleResume(ctx, request))
                     }
                 } catch (e: Throwable) {
-                    sendResponse(service.error(ctx, e))
+                    withContext(NonCancellable) {
+                        sendResponse(service.error(ctx, e))
+                    }
                 }
             }
         } catch (ex: WakeupException) {
