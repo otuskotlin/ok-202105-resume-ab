@@ -57,7 +57,7 @@ dependencies {
     implementation(project(":resume-ab-transport-mapping-openapi"))
     //service
     implementation(project(":resume-ab-service-openapi"))
-    //
+    //logics
     implementation(project(":resume-ab-logics"))
     //stubs
     implementation(project(":resume-ab-stubs"))
