@@ -1,6 +1,7 @@
-package ru.otus.otuskotlin.resume.reo.inmemory.models
+package ru.otus.otuskotlin.resume.repo.inmemory.models
 
 import ru.otus.otuskotlin.resume.backend.common.models.*
+import java.io.Serializable
 
 data class ResumeRow(
     val id: String? = null,
@@ -12,7 +13,7 @@ data class ResumeRow(
     val gender: String?  = null,
     val ownerId: String? = null,
     val visibility: String? = null,
-) {
+): Serializable {
     constructor(internal: ResumeModel): this(
         id = internal.id.asString().takeIf { it.isNotBlank() },
         firstName = internal.firstName.takeIf { it.isNotBlank() },

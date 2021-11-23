@@ -1,4 +1,4 @@
-package ru.otus.otuskotlin.resume.reo.inmemory
+package ru.otus.otuskotlin.resume.repo.inmemory
 
 import kotlinx.coroutines.runBlocking
 import org.ehcache.Cache
@@ -14,11 +14,13 @@ import ru.otus.otuskotlin.resume.backend.repo.common.DbResumeIdRequest
 import ru.otus.otuskotlin.resume.backend.repo.common.DbResumeModelRequest
 import ru.otus.otuskotlin.resume.backend.repo.common.DbResumeResponse
 import ru.otus.otuskotlin.resume.backend.repo.common.IRepoResume
-import ru.otus.otuskotlin.resume.reo.inmemory.models.ResumeRow
+import ru.otus.otuskotlin.resume.repo.inmemory.models.ResumeRow
+import java.time.Duration
 import java.util.*
 
 class RepoResumeInMemory(
-    val initObjects: List<ResumeModel>
+    private val initObjects: List<ResumeModel> = listOf(),
+    private val ttl: Duration = Duration.ofMinutes(1)
 ) : IRepoResume {
     private val cache: Cache<String, ResumeRow> = let {
         val cacheManager: CacheManager = CacheManagerBuilder
@@ -33,7 +35,7 @@ class RepoResumeInMemory(
                     ResumeRow::class.java,
                     ResourcePoolsBuilder.heap(100)
                 )
-                .withExpiry(ExpiryPolicyBuilder.timeToLiveExpiration(java.time.Duration.ofMinutes(1)))
+                .withExpiry(ExpiryPolicyBuilder.timeToLiveExpiration(ttl))
                 .build()
         )
     }

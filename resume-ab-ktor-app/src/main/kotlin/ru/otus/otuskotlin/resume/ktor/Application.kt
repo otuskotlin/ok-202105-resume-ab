@@ -2,7 +2,6 @@ package ru.otus.otuskotlin.resume.ktor
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.SerializationFeature
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.http.*
@@ -13,18 +12,16 @@ import io.ktor.routing.*
 import io.ktor.server.netty.*
 import io.ktor.websocket.*
 import ru.otus.otuskotlin.resume.ktor.controller.*
-import ru.otus.otuskotlin.resume.logics.ResumeCrud
-import ru.otus.otuskotlin.resume.service.services.ResumeService
 
 fun main(args: Array<String>): Unit = EngineMain.main(args)
 
 @Suppress("UNUSED_PARAMETER")
 @JvmOverloads
-fun Application.module(testing: Boolean = false) {
-    val crud = ResumeCrud()
-    val resumeService = ResumeService(crud)
-    val userSessions = mutableSetOf<KtorUserSession>()
-    val objectMapper = jacksonObjectMapper()
+fun Application.module(config: AppKtorConfig = AppKtorConfig()) {
+    val crud = config.crud
+    val resumeService = config.resumeService
+    val userSessions = config.userSessions
+    val objectMapper = config.objectMapper
 
     install(DefaultHeaders)
     install(CallLogging)

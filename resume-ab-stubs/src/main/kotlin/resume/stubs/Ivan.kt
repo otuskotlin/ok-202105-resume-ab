@@ -29,7 +29,7 @@ object Ivan {
         permissions = mutableSetOf(PermissionsModel.NONE)
     )
 
-    fun getModel(model: (ResumeModel.() -> Unit)? = null) = stubReady.also { stub ->
+    fun getModel(model: (ResumeModel.() -> Unit)? = null) = stubReady.copy().also { stub ->
         model?.let { stub.apply(it)}
     }
 

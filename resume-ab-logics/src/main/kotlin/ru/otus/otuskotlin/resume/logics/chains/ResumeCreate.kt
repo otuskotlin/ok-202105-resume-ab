@@ -18,7 +18,7 @@ object ResumeCreate : ICorExec<ResumeContext> by chain<ResumeContext>({
     )
 
     chainInitWorker(title = "Инициализация чейна")
-
+    chooseDb(title = "Выбираем БД или STUB")
     resumeCreateStub(title = "Обработка стабкейса для CREATE")
 
     validation {
@@ -37,8 +37,7 @@ object ResumeCreate : ICorExec<ResumeContext> by chain<ResumeContext>({
         }
     }
 
-
-    // TODO: продовая логика, работа с БД
+    repoCreate("Запись объекта в БД")
 
     answerPrepareChain(title = "Подготовка ответа")
 }).build()

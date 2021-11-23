@@ -18,7 +18,7 @@ object ResumeRead : ICorExec<ResumeContext> by chain<ResumeContext> ({
     )
 
     chainInitWorker(title = "Инициализация чейна")
-
+    chooseDb(title = "Выбираем БД или STUB")
     resumeReadStub(title = "Обработка стабкейса для READ")
 
     validation {
@@ -37,7 +37,7 @@ object ResumeRead : ICorExec<ResumeContext> by chain<ResumeContext> ({
         }
     }
 
-    // TODO: продовая логика, работа с БД
+    repoRead(title = "Чтение объекта из БД")
 
     answerPrepareChain(title = "Подготовка ответа")
 }).build()
