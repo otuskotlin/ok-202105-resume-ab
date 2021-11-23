@@ -30,6 +30,10 @@ dependencies {
     implementation(project(":resume-ab-stubs"))
     //service
     implementation(project(":resume-ab-service-openapi"))
+    //Db
+    implementation(project(":resume-ab-repo-inmemory"))
+//logics
+    implementation(project(":resume-ab-logics"))
 
     implementation("com.amazonaws:aws-lambda-java-core:$lambdaCoreVersion")
     implementation("com.amazonaws:aws-lambda-java-log4j:$lambdaLog4jVersion")

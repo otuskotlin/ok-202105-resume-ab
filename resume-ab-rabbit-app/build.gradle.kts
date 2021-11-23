@@ -32,7 +32,8 @@ dependencies {
     implementation(project(":resume-ab-logics"))
     //stubs
     implementation(project(":resume-ab-stubs"))
-
+    //Db
+    implementation(project(":resume-ab-repo-inmemory"))
 
     testImplementation("org.testcontainers:rabbitmq:$testContainersVersion")
     testImplementation(kotlin("test"))
