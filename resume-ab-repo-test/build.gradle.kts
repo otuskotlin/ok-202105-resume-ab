@@ -2,20 +2,18 @@ plugins {
     kotlin("jvm")
 }
 
-group = rootProject.group
-version = rootProject.version
 
-val coroutinesVersion: String by project
-
-repositories {
-    mavenCentral()
-}
 
 dependencies {
+    val coroutinesVersion: String by project
+
     implementation(kotlin("stdlib"))
 
     implementation(project(":common"))
 
-    api(kotlin("test-junit5"))
+    api(kotlin("test-junit"))
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+
+    val logbackVersion: String by project
+    implementation("ch.qos.logback:logback-classic:$logbackVersion")
 }

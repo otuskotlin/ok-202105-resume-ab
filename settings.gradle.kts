@@ -9,6 +9,7 @@ pluginManagement {
         kotlin("jvm") version kotlinVersion
         kotlin("multiplatform") version kotlinVersion
         kotlin("plugin.serialization") version kotlinVersion
+        kotlin("plugin.allopen") version kotlinVersion
         id("org.openapi.generator") version openApiVersion
 
         // spring
@@ -21,6 +22,8 @@ pluginManagement {
         kotlin("plugin.spring") version springPluginVersion
         id("com.bmuschko.docker-java-application") version bmuschkoVersion
 
+        val shadowJarVersion: String by settings
+        id("com.github.johnrengelman.shadow") version shadowJarVersion
     }
 }
 

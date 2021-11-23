@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import com.github.gradle.node.npm.task.NpxTask
 
 val jacksonVersion: String by project
-val lambdaCoreVersion: String by project
 val lambdaLog4jVersion: String by project
 val lambdaEventsVersion: String by project
 val coroutinesVersion: String by project
@@ -35,9 +34,9 @@ dependencies {
     //logics
     implementation(project(":resume-ab-logics"))
 
-    implementation("com.amazonaws:aws-lambda-java-core:$lambdaCoreVersion")
-    implementation("com.amazonaws:aws-lambda-java-log4j:$lambdaLog4jVersion")
-    implementation("com.amazonaws:aws-lambda-java-events:$lambdaEventsVersion")
+    implementation("com.amazonaws:aws-lambda-java-core:1.2.1")
+    implementation("com.amazonaws:aws-lambda-java-log4j:1.0.1")
+    implementation("com.amazonaws:aws-lambda-java-events:3.10.0")
 
     implementation("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
     implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")

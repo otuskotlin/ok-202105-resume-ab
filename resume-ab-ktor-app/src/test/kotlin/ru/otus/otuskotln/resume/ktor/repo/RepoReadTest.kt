@@ -3,7 +3,7 @@ package ru.otus.otuskotln.resume.ktor.repo
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.ktor.http.*
 import io.ktor.server.testing.*
-import org.junit.jupiter.api.Test
+import org.junit.Test
 import resume.stubs.Ivan
 import ru.otus.otuskotlin.resume.ktor.AppKtorConfig
 import ru.otus.otuskotlin.resume.ktor.module

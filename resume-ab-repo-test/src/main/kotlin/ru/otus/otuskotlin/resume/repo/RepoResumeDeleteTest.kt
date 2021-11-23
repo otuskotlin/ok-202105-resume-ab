@@ -1,7 +1,7 @@
 package ru.otus.otuskotlin.resume.repo
 
 import kotlinx.coroutines.runBlocking
-import org.junit.jupiter.api.Test
+import org.junit.Test
 import ru.otus.otuskotlin.resume.backend.common.models.CommonErrorModel
 import ru.otus.otuskotlin.resume.backend.common.models.ResumeIdModel
 import ru.otus.otuskotlin.resume.backend.common.models.ResumeModel
