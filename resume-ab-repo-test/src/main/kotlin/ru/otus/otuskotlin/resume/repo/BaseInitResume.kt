@@ -1,14 +1,15 @@
 package ru.otus.otuskotlin.resume.repo
 
 import ru.otus.otuskotlin.resume.backend.common.models.*
+import java.util.*
 
-abstract class BaseInitResume(val op: String): IInitObject<ResumeModel> {
+abstract class BaseInitResume: IInitObject<ResumeModel> {
     fun createInitTestModel(
         suf: String,
-        ownerId: OwnerIdModel = OwnerIdModel("owner-123"),
+        ownerId: OwnerIdModel = OwnerIdModel(UUID.randomUUID()),
         permissions: Set<PermissionsModel> = setOf(PermissionsModel.READ)
     ) = ResumeModel(
-        id = ResumeIdModel(id = "resume-repo-$op-$suf"),
+        id = ResumeIdModel(UUID.randomUUID()),
         firstName = "$suf Ivan",
         lastName = "$suf Ivanov",
         middleName = "$suf Ivanovich",

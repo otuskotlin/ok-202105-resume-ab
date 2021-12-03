@@ -25,7 +25,7 @@ class ResumeCrudValidationTest {
         val context = ResumeContext(
             startTime = Instant.now(),
             operation = ResumeContext.ResumeOperations.CREATE,
-            requestResume = Ivan.getModel{ id = ResumeIdModel.NONE },
+            requestResume = Ivan.getModel{ id = ResumeIdModel("f62d0c1c-bccd-486f-9364-857581cd6282") },
             stubCase = ResumeStubCase.SUCCESS,
         )
         runBlocking {

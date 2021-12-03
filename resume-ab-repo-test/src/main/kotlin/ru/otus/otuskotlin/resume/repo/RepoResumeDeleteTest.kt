@@ -7,6 +7,7 @@ import ru.otus.otuskotlin.resume.backend.common.models.ResumeIdModel
 import ru.otus.otuskotlin.resume.backend.common.models.ResumeModel
 import ru.otus.otuskotlin.resume.backend.repo.common.DbResumeIdRequest
 import ru.otus.otuskotlin.resume.backend.repo.common.IRepoResume
+import java.util.*
 import kotlin.test.assertEquals
 
 abstract class RepoResumeDeleteTest {
@@ -30,13 +31,13 @@ abstract class RepoResumeDeleteTest {
         assertEquals(listOf(CommonErrorModel(field = "id", message = "Not Found")), result.errors)
     }
 
-    companion object: BaseInitResume("delete") {
+    companion object: BaseInitResume() {
         override val initObjects: List<ResumeModel> = listOf(
             createInitTestModel("delete")
         )
 
         private val deleteSuccessStub = initObjects.first()
         val deleteObj = deleteSuccessStub.id
-        val deleteObjNotFound = ResumeIdModel("resumead-repo-delete-notFound")
+        val deleteObjNotFound = ResumeIdModel(UUID.randomUUID())
     }
 }

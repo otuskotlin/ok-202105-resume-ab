@@ -31,7 +31,7 @@ class AppKafkaTest {
                     0L,
                     "test-1",
                     CreateResumeRequest(
-                        requestId = "123",
+                        requestId = "f62d0c1c-bccd-486f-9364-857581cd6282",
                         createResume = CreatableResume(
                             firstName = "Ivan",
                             lastName = "Ivanov",
@@ -65,7 +65,7 @@ class AppKafkaTest {
 
         val message = producer.history().first()
         val result = message.value().fromJson<CreateResumeResponse>()
-        assertEquals("123", result.requestId)
+        assertEquals("f62d0c1c-bccd-486f-9364-857581cd6282", result.requestId)
         assertEquals("Ivan", result.createdResume?.firstName)
     }
 

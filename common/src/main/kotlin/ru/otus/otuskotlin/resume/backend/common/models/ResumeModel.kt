@@ -10,5 +10,5 @@ data class ResumeModel(
     var gender: ResumeGenderModel = ResumeGenderModel.NONE,
     var ownerId: OwnerIdModel = OwnerIdModel.NONE,
     var visibility: ResumeVisibilityModel = ResumeVisibilityModel.NONE,
-    var permissions: MutableSet<PermissionsModel> = mutableSetOf()
+    var permissions: MutableSet<PermissionsModel> = mutableSetOf(),
 )

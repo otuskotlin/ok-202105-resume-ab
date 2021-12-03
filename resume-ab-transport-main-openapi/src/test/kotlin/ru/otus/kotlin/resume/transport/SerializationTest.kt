@@ -7,7 +7,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class SerializationTest {
-    private val requestId = "123abc"
+    private val requestId = "f62d0c1c-bccd-486f-9364-857581cd6282"
     private val createRequest = CreateResumeRequest(
         requestId = requestId,
         createResume = CreatableResume(

@@ -4,7 +4,7 @@ import ru.otus.otuskotlin.resume.backend.common.models.*
 
 object Ivan {
     private val stubReady = ResumeModel(
-        id = ResumeIdModel(id = "123"),
+        id = ResumeIdModel(id = "f62d0c1c-bccd-486f-9364-857581cd6282"),
         firstName = "Ivan",
         lastName = "Ivanov",
         middleName = "Ivanovich",
@@ -17,7 +17,7 @@ object Ivan {
     )
 
     private val stubInProgress = ResumeModel(
-        id = ResumeIdModel(id = "1234567890"),
+        id = ResumeIdModel(id = "f62d0c1c-bccd-486f-9364-857581cd6282"),
         firstName = "Ivan",
         lastName = "Ivanov",
         middleName = "Ivanovich",

@@ -5,6 +5,7 @@ import org.junit.Test
 import ru.otus.otuskotlin.resume.backend.common.models.*
 import ru.otus.otuskotlin.resume.backend.repo.common.DbResumeModelRequest
 import ru.otus.otuskotlin.resume.backend.repo.common.IRepoResume
+import java.util.*
 import kotlin.test.assertEquals
 
 abstract class RepoResumeUpdateTest {
@@ -26,12 +27,12 @@ abstract class RepoResumeUpdateTest {
         assertEquals(listOf(CommonErrorModel(field = "id", message = "Not Found")), result.errors)
     }
 
-    companion object: BaseInitResume("update") {
+    companion object: BaseInitResume() {
         override val initObjects: List<ResumeModel> = listOf(
             createInitTestModel("update")
         )
         val updateId = initObjects.first().id
-        val updateIdNotFound = ResumeIdModel("resume-repo-update-not-found")
+        val updateIdNotFound = ResumeIdModel(UUID.randomUUID())
 
         private val updateObj = ResumeModel(
             id = updateId,
@@ -41,7 +42,7 @@ abstract class RepoResumeUpdateTest {
             age = "10",
             birthDate = "2011-10-10",
             gender = ResumeGenderModel.MALE,
-            ownerId = OwnerIdModel("owner-123"),
+            ownerId = OwnerIdModel(UUID.randomUUID()),
             visibility = ResumeVisibilityModel.REGISTERED_ONLY,
             permissions = mutableSetOf(PermissionsModel.READ, PermissionsModel.CONTACT)
         )
@@ -54,7 +55,7 @@ abstract class RepoResumeUpdateTest {
             age = "0",
             birthDate = "2011-10-10",
             gender = ResumeGenderModel.MALE,
-            ownerId = OwnerIdModel("owner-123"),
+            ownerId = OwnerIdModel(UUID.randomUUID()),
             visibility = ResumeVisibilityModel.REGISTERED_ONLY,
             permissions = mutableSetOf(PermissionsModel.READ, PermissionsModel.CONTACT)
         )

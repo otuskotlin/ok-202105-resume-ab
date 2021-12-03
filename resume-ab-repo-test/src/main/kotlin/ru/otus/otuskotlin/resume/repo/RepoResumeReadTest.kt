@@ -5,6 +5,7 @@ import org.junit.Test
 import ru.otus.otuskotlin.resume.backend.common.models.*
 import ru.otus.otuskotlin.resume.backend.repo.common.DbResumeIdRequest
 import ru.otus.otuskotlin.resume.backend.repo.common.IRepoResume
+import java.util.*
 import kotlin.test.assertEquals
 
 abstract class RepoResumeReadTest {
@@ -12,7 +13,7 @@ abstract class RepoResumeReadTest {
 
     @Test
     fun readSuccess() {
-        val result = runBlocking { repo.read(DbResumeIdRequest(readObjId)) }
+        val result = runBlocking { repo.read(DbResumeIdRequest(successId)) }
 
         assertEquals(true, result.isSuccess)
         assertEquals(readResumeStub, result.result)
@@ -28,24 +29,13 @@ abstract class RepoResumeReadTest {
         assertEquals(listOf(CommonErrorModel(field = "id", message = "Not Found")), result.errors)
     }
 
-    companion object: BaseInitResume("read") {
+    companion object: BaseInitResume() {
         override val initObjects: List<ResumeModel> = listOf(
             createInitTestModel("read")
         )
-        val readObjId = ResumeIdModel("resume-repo-read-success")
-        val readObjNotFoundId = ResumeIdModel("resume-repo-read-notFound")
+        private val readResumeStub = initObjects.first()
+        val successId = readResumeStub.id
+        val readObjNotFoundId = ResumeIdModel(UUID.randomUUID())
 
-        private val readResumeStub = ResumeModel(
-            id = readObjId,
-            firstName = "Ivan",
-            lastName = "Ivanov",
-            middleName = "Ivanovich",
-            age = "10",
-            birthDate = "2011-10-10",
-            gender = ResumeGenderModel.MALE,
-            ownerId = OwnerIdModel("owner-123"),
-            visibility = ResumeVisibilityModel.REGISTERED_ONLY,
-            permissions = mutableSetOf(PermissionsModel.READ, PermissionsModel.UPDATE)
-        )
     }
 }

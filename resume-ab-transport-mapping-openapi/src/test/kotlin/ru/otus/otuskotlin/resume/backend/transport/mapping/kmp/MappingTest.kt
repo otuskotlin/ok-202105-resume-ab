@@ -7,6 +7,7 @@ import ru.otus.otuskotlin.resume.openapi.models.ResumeVisibility
 import ru.otus.otuskotlin.resume.openapi.models.UpdatableResume
 import ru.otus.otuskotlin.resume.openapi.models.UpdateResumeRequest
 import ru.otus.otuskotlin.resume.openapi.models.UpdateResumeResponse
+import java.util.*
 import kotlin.test.assertEquals
 
 class MappingTest {
@@ -42,16 +43,16 @@ class MappingTest {
     }
 
     @Test
-    fun updateREsponseMappingTest() {
+    fun updateResponseMappingTest() {
         val context = ResumeContext(
             onRequest = "1",
             responseResume = ResumeModel(
-                id = ResumeIdModel("id-002"),
+                id = ResumeIdModel("f62d0c1c-bccd-486f-9364-857581cd6282"),
                 firstName = "Petr",
                 lastName = "Petrov",
                 middleName = "Petrovich",
                 age = "40",
-                ownerId = OwnerIdModel("owner_id-002"),
+                ownerId = OwnerIdModel(UUID.randomUUID()),
                 birthDate = "1981-12-31",
                 gender = ResumeGenderModel.MALE,
                 visibility = ResumeVisibilityModel.REGISTERED_ONLY

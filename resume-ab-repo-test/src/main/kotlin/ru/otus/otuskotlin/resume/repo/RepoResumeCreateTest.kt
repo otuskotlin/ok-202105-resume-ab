@@ -5,6 +5,7 @@ import org.junit.Test
 import ru.otus.otuskotlin.resume.backend.common.models.*
 import ru.otus.otuskotlin.resume.backend.repo.common.DbResumeModelRequest
 import ru.otus.otuskotlin.resume.backend.repo.common.IRepoResume
+import java.util.*
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 
@@ -21,7 +22,7 @@ abstract class RepoResumeCreateTest {
         assertEquals(emptyList(), result.errors)
     }
 
-    companion object: BaseInitResume("create") {
+    companion object: BaseInitResume() {
         private val createObj = ResumeModel(
         firstName = "Ivan",
         lastName = "Ivanov",
@@ -29,7 +30,7 @@ abstract class RepoResumeCreateTest {
         age = "10",
         birthDate = "2011-10-10",
         gender = ResumeGenderModel.MALE,
-        ownerId = OwnerIdModel("owner-123"),
+        ownerId = OwnerIdModel(UUID.randomUUID()),
         visibility = ResumeVisibilityModel.REGISTERED_ONLY,
         permissions = mutableSetOf(PermissionsModel.READ, PermissionsModel.UPDATE)
         )

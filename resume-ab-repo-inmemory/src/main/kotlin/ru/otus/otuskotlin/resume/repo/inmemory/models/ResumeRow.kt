@@ -2,6 +2,7 @@ package ru.otus.otuskotlin.resume.repo.inmemory.models
 
 import ru.otus.otuskotlin.resume.backend.common.models.*
 import java.io.Serializable
+import java.security.Permissions
 
 data class ResumeRow(
     val id: String? = null,
@@ -13,6 +14,7 @@ data class ResumeRow(
     val gender: String?  = null,
     val ownerId: String? = null,
     val visibility: String? = null,
+    val permissions: String? = null
 ): Serializable {
     constructor(internal: ResumeModel): this(
         id = internal.id.asString().takeIf { it.isNotBlank() },
@@ -20,10 +22,11 @@ data class ResumeRow(
         lastName = internal.lastName.takeIf { it.isNotBlank() },
         middleName = internal.middleName.takeIf { it.isNotBlank() },
         age = internal.age.takeIf { it.isNotBlank() },
-        birthDate = internal.age.takeIf { it.isNotBlank() },
+        birthDate = internal.birthDate.takeIf { it.isNotBlank() },
         gender = internal.gender.takeIf { it != ResumeGenderModel.NONE }?.name,
         ownerId = internal.ownerId.takeIf { it != OwnerIdModel.NONE }?.asString(),
         visibility = internal.visibility.takeIf { it != ResumeVisibilityModel.NONE }?.name,
+        permissions = internal.permissions.takeIf { it.isNotEmpty() }?.toString()
     )
 
     fun toInternal(): ResumeModel = ResumeModel(
@@ -35,6 +38,7 @@ data class ResumeRow(
         birthDate = birthDate ?: "",
         gender = gender?.let { ResumeGenderModel.valueOf(it) } ?: ResumeGenderModel.NONE,
         ownerId = ownerId?.let {OwnerIdModel(it)} ?: OwnerIdModel.NONE,
-        visibility = visibility?.let { ResumeVisibilityModel.valueOf(it) } ?: ResumeVisibilityModel.NONE
+        visibility = visibility?.let { ResumeVisibilityModel.valueOf(it) } ?: ResumeVisibilityModel.NONE,
+        //todo add permissions
     )
 }
