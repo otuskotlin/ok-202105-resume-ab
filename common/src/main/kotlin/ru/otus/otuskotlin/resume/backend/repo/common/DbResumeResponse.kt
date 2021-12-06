@@ -7,4 +7,7 @@ data class DbResumeResponse(
     override val result: ResumeModel?,
     override val isSuccess: Boolean,
     override val errors: List<CommonErrorModel>
-): IDbResponse<ResumeModel?>
+): IDbResponse<ResumeModel?> {
+    constructor(result: ResumeModel) : this(result, true, emptyList())
+    constructor(error: CommonErrorModel) : this(null, false, listOf(error))
+}

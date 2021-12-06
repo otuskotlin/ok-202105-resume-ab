@@ -12,11 +12,17 @@ data class ResumeContext(
     var config: ContextConfig = ContextConfig(),
 
     val userSession: IUserSession<*> = EmptySession,
+    val principal: ResumePrincipalModel = ResumePrincipalModel.NONE,
+    val chainPermissions: MutableSet<ResumeUserPermissions> = mutableSetOf(),
     var resumeRepo: IRepoResume = IRepoResume.NONE,
 
     var onRequest: String = "",
     var requestResumeId: ResumeIdModel = ResumeIdModel.NONE,
     var requestResume: ResumeModel = ResumeModel(),
+
+    var dbResume: ResumeModel = ResumeModel(),
+    var permitted: Boolean = false,
+
     var responseResume: ResumeModel = ResumeModel(),
     var errors: MutableList<IError> = mutableListOf(),
     var status: CorStatus = CorStatus.NONE

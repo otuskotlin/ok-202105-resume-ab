@@ -44,7 +44,7 @@ abstract class RepoResumeUpdateTest {
             gender = ResumeGenderModel.MALE,
             ownerId = OwnerIdModel(UUID.randomUUID()),
             visibility = ResumeVisibilityModel.REGISTERED_ONLY,
-            permissions = mutableSetOf(PermissionsModel.READ, PermissionsModel.CONTACT)
+            permissions = mutableSetOf(PermissionModel.READ, PermissionModel.CONTACT)
         )
 
         private val updateObjNotFound = ResumeModel(
@@ -57,7 +57,7 @@ abstract class RepoResumeUpdateTest {
             gender = ResumeGenderModel.MALE,
             ownerId = OwnerIdModel(UUID.randomUUID()),
             visibility = ResumeVisibilityModel.REGISTERED_ONLY,
-            permissions = mutableSetOf(PermissionsModel.READ, PermissionsModel.CONTACT)
+            permissions = mutableSetOf(PermissionModel.READ, PermissionModel.CONTACT)
         )
     }
 }

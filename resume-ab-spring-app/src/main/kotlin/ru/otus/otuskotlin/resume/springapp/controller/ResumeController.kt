@@ -25,7 +25,7 @@ class ResumeController (
         return try {
             runBlocking { resumeService.createResume(context, request) }
         } catch (e: Exception) {
-            return resumeService.error(context, e) as CreateResumeResponse
+            return runBlocking { resumeService.error(context, e) as CreateResumeResponse }
         }
     }
 
@@ -38,7 +38,7 @@ class ResumeController (
         return try {
             runBlocking { resumeService.readResume(context, request) }
         } catch (e: Exception) {
-            return resumeService.error(context, e) as ReadResumeResponse
+            return runBlocking { resumeService.error(context, e) as ReadResumeResponse }
         }
     }
 
@@ -51,7 +51,7 @@ class ResumeController (
         return try {
             runBlocking { resumeService.updateResume(context, request) }
         } catch (e: Exception) {
-            return resumeService.error(context, e) as UpdateResumeResponse
+            return runBlocking { resumeService.error(context, e) as UpdateResumeResponse }
         }
     }
 
@@ -64,7 +64,7 @@ class ResumeController (
         return try {
             runBlocking { resumeService.deleteResume(context, request) }
         } catch (e: Exception) {
-            return resumeService.error(context, e) as DeleteResumeResponse
+            return runBlocking { resumeService.error(context, e) as DeleteResumeResponse }
         }
     }
 }

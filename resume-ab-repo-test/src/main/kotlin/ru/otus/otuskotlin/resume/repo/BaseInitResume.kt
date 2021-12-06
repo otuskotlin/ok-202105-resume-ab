@@ -7,7 +7,7 @@ abstract class BaseInitResume: IInitObject<ResumeModel> {
     fun createInitTestModel(
         suf: String,
         ownerId: OwnerIdModel = OwnerIdModel(UUID.randomUUID()),
-        permissions: Set<PermissionsModel> = setOf(PermissionsModel.READ)
+        permissions: Set<PermissionModel> = setOf(PermissionModel.READ)
     ) = ResumeModel(
         id = ResumeIdModel(UUID.randomUUID()),
         firstName = "$suf Ivan",

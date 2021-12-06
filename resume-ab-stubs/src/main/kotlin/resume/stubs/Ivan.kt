@@ -13,7 +13,7 @@ object Ivan {
         gender = ResumeGenderModel.MALE,
         ownerId = OwnerIdModel(id = "111111-22222"),
         visibility = ResumeVisibilityModel.PUBLIC,
-        permissions = mutableSetOf(PermissionsModel.READ)
+        permissions = mutableSetOf(PermissionModel.READ)
     )
 
     private val stubInProgress = ResumeModel(
@@ -26,7 +26,7 @@ object Ivan {
         gender = ResumeGenderModel.MALE,
         ownerId = OwnerIdModel(id = "22-33"),
         visibility = ResumeVisibilityModel.OWNER_ONLY,
-        permissions = mutableSetOf(PermissionsModel.NONE)
+        permissions = mutableSetOf(PermissionModel.NONE)
     )
 
     fun getModel(model: (ResumeModel.() -> Unit)? = null) = stubReady.copy().also { stub ->

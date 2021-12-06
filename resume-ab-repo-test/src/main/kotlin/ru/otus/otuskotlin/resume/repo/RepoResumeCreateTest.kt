@@ -32,7 +32,7 @@ abstract class RepoResumeCreateTest {
         gender = ResumeGenderModel.MALE,
         ownerId = OwnerIdModel(UUID.randomUUID()),
         visibility = ResumeVisibilityModel.REGISTERED_ONLY,
-        permissions = mutableSetOf(PermissionsModel.READ, PermissionsModel.UPDATE)
+        permissions = mutableSetOf(PermissionModel.READ, PermissionModel.UPDATE)
         )
         override val initObjects: List<ResumeModel> = emptyList()
     }
