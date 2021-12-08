@@ -7,4 +7,4 @@ management:
       exposure:
         include: info,env
 server:
-  port: 8081
+  port: 8080
