@@ -23,18 +23,13 @@ object ResumeCreate : ICorExec<ResumeContext> by chain<ResumeContext>({
     resumeCreateStub(title = "Обработка стабкейса для CREATE")
 
     validation {
-        errorHandler { validationResult ->
-            if (validationResult.isSuccess) return@errorHandler
-            val errs = validationResult.errors.map {
-                CommonErrorModel(message = it.message)
-            }
-            errors.addAll(errs)
-            status = CorStatus.FAILING
-        }
-
         validate<String?> {
-            on {this.requestResume.id.asString()}
-            validator(ValidatorStringNonEmpty())
+            on { requestResume.firstName }
+            validator(ValidatorStringNonEmpty(field = "firstName"))
+        }
+        validate<String?> {
+            on { requestResume.lastName }
+            validator(ValidatorStringNonEmpty(field = "lastName"))
         }
     }
 //    chainPermissions("Вычисление разрешений для пользователя")

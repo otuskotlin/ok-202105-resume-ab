@@ -22,18 +22,9 @@ object ResumeRead : ICorExec<ResumeContext> by chain<ResumeContext> ({
     resumeReadStub(title = "Обработка стабкейса для READ")
 
     validation {
-        errorHandler { validationResult ->
-            if (validationResult.isSuccess) return@errorHandler
-            val errs = validationResult.errors.map {
-                CommonErrorModel(message = it.message)
-            }
-            errors.addAll(errs)
-            status = CorStatus.FAILING
-        }
-
         validate<String?> {
-            on {this.requestResume.id.asString()}
-            validator(ValidatorStringNonEmpty())
+            on {requestResumeId.asString()}
+            validator(ValidatorStringNonEmpty(field = "id"))
         }
     }
 

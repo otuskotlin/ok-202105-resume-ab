@@ -40,6 +40,7 @@ fun ResumeContext.setQuery(query: CreateResumeRequest) = apply {
 }
 
 fun ResumeContext.setQuery(query: ReadResumeRequest) = apply {
+    operation = ResumeContext.ResumeOperations.READ
     onRequest = query.requestId?:""
     requestResumeId = ResumeIdModel(query.readResumeId?:"")
     workMode = query.debug?.mode.toModel()
@@ -47,6 +48,7 @@ fun ResumeContext.setQuery(query: ReadResumeRequest) = apply {
 }
 
 fun ResumeContext.setQuery(query: UpdateResumeRequest) = apply {
+    operation = ResumeContext.ResumeOperations.UPDATE
     onRequest = query.requestId?:""
     requestResume = query.createResume?.toModel()?: ResumeModel()
     workMode = query.debug?.mode.toModel()
@@ -54,6 +56,7 @@ fun ResumeContext.setQuery(query: UpdateResumeRequest) = apply {
 }
 
 fun ResumeContext.setQuery(query: DeleteResumeRequest) = apply {
+    operation = ResumeContext.ResumeOperations.DELETE
     onRequest = query.requestId?:""
     requestResumeId = ResumeIdModel(query.deleteResumeId?:"")
     stubCase = query.debug?.stubCase?.takeIf { workMode == WorkMode.STUB}.toModel()

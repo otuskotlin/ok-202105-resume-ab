@@ -12,7 +12,7 @@ data class ResumeContext(
     var config: ContextConfig = ContextConfig(),
 
     val userSession: IUserSession<*> = EmptySession,
-    val principal: ResumePrincipalModel = ResumePrincipalModel.NONE,
+//    val principal: ResumePrincipalModel = ResumePrincipalModel.NONE,
     val chainPermissions: MutableSet<ResumeUserPermissions> = mutableSetOf(),
     var resumeRepo: IRepoResume = IRepoResume.NONE,
 
