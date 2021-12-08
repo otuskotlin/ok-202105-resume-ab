@@ -37,18 +37,18 @@ object ResumeCreate : ICorExec<ResumeContext> by chain<ResumeContext>({
             validator(ValidatorStringNonEmpty())
         }
     }
-    chainPermissions("Вычисление разрешений для пользователя")
-        worker {
-            title = "Инициализация dbResume"
-
-            on { status == CorStatus.RUNNING}
-            handle {
-                dbResume.ownerId = principal.id
-            }
-        }
-    accessValidation("Вычисление прав доступа")
-    prepareResumeForSaving("Подготовка объекта для сохранения")
+//    chainPermissions("Вычисление разрешений для пользователя")
+//        worker {
+//            title = "Инициализация dbResume"
+//
+//            on { status == CorStatus.RUNNING}
+//            handle {
+//                dbResume.ownerId = principal.id
+//            }
+//        }
+//    accessValidation("Вычисление прав доступа")
+//    prepareResumeForSaving("Подготовка объекта для сохранения")
     repoCreate("Запись объекта в БД")
-    frontPermissions(title = "Вычисление пользовательских разрешений для фронтенда")
+//    frontPermissions(title = "Вычисление пользовательских разрешений для фронтенда")
     answerPrepareChain(title = "Подготовка ответа")
 }).build()

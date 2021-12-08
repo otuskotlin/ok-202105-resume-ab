@@ -9,27 +9,23 @@ import ru.otus.otuskotlin.resume.backend.common.models.*
 
 @Entity
 class ResumeCassandraDTO (
-    @CqlName(COLUMN_ID)
+    @field:CqlName(COLUMN_ID)
     @PartitionKey
     var id: String? = null,
-    @CqlName(COLUMN_FIRST_NAME)
+    @field:CqlName(COLUMN_FIRST_NAME)
     var firstName: String? = null,
-    @CqlName(COLUMN_LAST_NAME)
+    @field:CqlName(COLUMN_LAST_NAME)
     var lastName: String? = null,
-    @CqlName(COLUMN_MIDDLE_NAME)
+    @field:CqlName(COLUMN_MIDDLE_NAME)
     var middleName: String? = null,
-    @CqlName(COLUMN_AGE)
+    @field:CqlName(COLUMN_AGE)
     var age: String? = null,
-    @CqlName(COLUMN_BIRTH_DATE)
+    @field:CqlName(COLUMN_BIRTH_DATE)
     var birthDate: String? = null,
-    @CqlName(COLUMN_GENDER)
+    @field:CqlName(COLUMN_GENDER)
     var gender: ResumeGenderModel? = null,
-    @CqlName(COLUMN_OWNER_ID)
-    var ownerId: String? = null,
-    @CqlName(COLUMN_VISIBILITY)
-    var visibility: ResumeVisibilityModel? = null,
-    @CqlName(COLUMN_PERMISSIONS)
-    var permissions: Set<PermissionModel>? = null
+    @field:CqlName(COLUMN_OWNER_ID)
+    var ownerId: String? = null
 ) {
     constructor(resumeModel: ResumeModel) : this(
         id = resumeModel.id.takeIf { it != ResumeIdModel.NONE }?.asString(),
@@ -40,8 +36,6 @@ class ResumeCassandraDTO (
         birthDate = resumeModel.birthDate.takeIf { it.isNotBlank() },
         gender = resumeModel.gender.takeIf { it != ResumeGenderModel.NONE },
         ownerId = resumeModel.ownerId.takeIf { it != OwnerIdModel.NONE }?.asString(),
-        visibility = resumeModel.visibility.takeIf { it != ResumeVisibilityModel.NONE },
-        permissions = resumeModel.permissions.takeIf { it.isNotEmpty() }
         )
 
     fun toResumeModel(): ResumeModel = ResumeModel(
@@ -53,9 +47,7 @@ class ResumeCassandraDTO (
         birthDate = birthDate ?: "",
         gender = gender ?: ResumeGenderModel.NONE,
         ownerId = ownerId?.let { OwnerIdModel(it) } ?: OwnerIdModel.NONE,
-        visibility =  visibility ?: ResumeVisibilityModel.NONE,
-        permissions = permissions.orEmpty().toMutableSet()
-    )
+        )
 
     companion object {
         const val TABLE_NAME = "resume"
@@ -81,9 +73,6 @@ class ResumeCassandraDTO (
             .withColumn(COLUMN_BIRTH_DATE, DataTypes.TEXT)
             .withColumn(COLUMN_GENDER, DataTypes.TEXT)
             .withColumn(COLUMN_OWNER_ID, DataTypes.TEXT)
-            .withColumn(COLUMN_VISIBILITY, DataTypes.TEXT)
-            .withColumn(COLUMN_PERMISSIONS, DataTypes.setOf(DataTypes.TEXT))
             .build()
-
     }
 }

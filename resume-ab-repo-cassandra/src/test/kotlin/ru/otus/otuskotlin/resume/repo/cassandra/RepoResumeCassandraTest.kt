@@ -33,6 +33,7 @@ class TestCasandraContainer : CassandraContainer<TestCasandraContainer>("cassand
 
 object TestCompanion {
     //    val keyspace = "data"
+    const val LOCAL_DATA_CENTER = "datacenter1"
     val container by lazy { TestCasandraContainer().apply { start() } }
 
     val codecRegistry by lazy {
@@ -56,7 +57,7 @@ object TestCompanion {
     val session by lazy {
         CqlSession.builder()
             .addContactPoint(InetSocketAddress(container.host, container.getMappedPort(CassandraContainer.CQL_PORT)))
-            .withLocalDatacenter("datacenter1")
+            .withLocalDatacenter(LOCAL_DATA_CENTER)
             .withAuthCredentials(container.username, container.password)
             .withCodecRegistry(codecRegistry)
             .build()
