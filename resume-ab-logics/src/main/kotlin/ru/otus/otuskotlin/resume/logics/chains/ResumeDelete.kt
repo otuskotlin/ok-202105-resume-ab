@@ -18,7 +18,7 @@ object ResumeDelete : ICorExec<ResumeContext> by chain<ResumeContext> ({
     )
 
     chainInitWorker(title = "Инициализация чейна")
-
+    chooseDb(title = "Выбираем БД или STUB")
     resumeDeleteStub(title = "Обработка стабкейса для DELETE")
 
     validation {
@@ -37,7 +37,7 @@ object ResumeDelete : ICorExec<ResumeContext> by chain<ResumeContext> ({
         }
     }
 
-    // TODO: продовая логика, работа с БД
+    repoDelete("Удаление объекта из БД")
 
     answerPrepareChain(title = "Подготовка ответа")
 }).build()

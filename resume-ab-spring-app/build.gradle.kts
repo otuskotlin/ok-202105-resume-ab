@@ -36,6 +36,8 @@ dependencies {
     implementation(project(":resume-ab-service-openapi"))
     //logics
     implementation(project(":resume-ab-logics"))
+    //Db
+    implementation(project(":resume-ab-repo-inmemory"))
 }
 
 tasks.withType<KotlinCompile> {

@@ -41,12 +41,10 @@ dependencies {
     implementation(ktor("server-netty"))
     implementation(ktor("jackson"))
     implementation(ktor("websockets"))
+    implementation(ktor("auth"))
+    implementation(ktor("auth-jwt"))
 
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
-
-    //koin
-    implementation("io.insert-koin:koin-ktor:$koinVersion")
-    implementation("io.insert-koin:koin-logger-slf4j:$koinVersion")
 
     implementation(ktor("server-test-host"))
     testImplementation(kotlin("test-junit"))
@@ -57,8 +55,10 @@ dependencies {
     implementation(project(":resume-ab-transport-mapping-openapi"))
     //service
     implementation(project(":resume-ab-service-openapi"))
-    //
+    //logics
     implementation(project(":resume-ab-logics"))
     //stubs
     implementation(project(":resume-ab-stubs"))
+    //DB
+    implementation(project(":resume-ab-repo-inmemory"))
 }

@@ -8,8 +8,11 @@ import org.apache.kafka.clients.producer.Producer
 import org.apache.kafka.clients.producer.ProducerConfig
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.apache.kafka.common.serialization.StringSerializer
+import ru.otus.otuskotlin.resume.backend.common.context.ContextConfig
 import ru.otus.otuskotlin.resume.logics.ResumeCrud
+import ru.otus.otuskotlin.resume.repo.inmemory.RepoResumeInMemory
 import ru.otus.otuskotlin.resume.service.services.ResumeService
+import java.time.Duration
 import java.util.*
 
 class AppKafkaConfig(
@@ -17,7 +20,12 @@ class AppKafkaConfig(
     val kafkaTopicIn: String = KAFKA_TOPIC_IN,
     val kafkaTopicOut: String = KAFKA_TOPIC_OUT,
     val kafkaGroupId: String = KAFKA_GROUP_ID,
-    val service: ResumeService = ResumeService(crud = ResumeCrud()),
+    val contextConfig: ContextConfig = ContextConfig(
+        repoProd = RepoResumeInMemory(initObjects = listOf(), ttl = Duration.ofHours(1)),
+        repoTest = RepoResumeInMemory(initObjects = listOf())
+    ),
+    val crud: ResumeCrud = ResumeCrud(contextConfig),
+    val service: ResumeService = ResumeService(crud = crud),
     val kafkaConsumer: Consumer<String, String> = kafkaConsumer(kafkaHosts, kafkaGroupId),
     val kafkaProducer: Producer<String, String> = kafkaProducer(kafkaHosts),
     ) {

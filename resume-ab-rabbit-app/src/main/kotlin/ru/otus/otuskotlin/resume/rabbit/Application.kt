@@ -4,8 +4,6 @@ import ru.otus.otuskotlin.resume.logics.ResumeCrud
 import ru.otus.otuskotlin.resume.service.services.ResumeService
 
 fun main() {
-    val crud = ResumeCrud()
-    val service = ResumeService(crud)
     val config = RabbitConfig()
     val processor by lazy {
         RabbitDirectProcessor(
@@ -14,7 +12,7 @@ fun main() {
             keyOut = "out",
             exchange = "test-exchange",
             queue = "test=queue",
-            service = service,
+            service = config.service,
             consumerTag = "test-tag"
         )
     }

@@ -4,7 +4,7 @@ import ru.otus.otuskotlin.resume.backend.common.models.*
 
 object Ivan {
     private val stubReady = ResumeModel(
-        id = ResumeIdModel(id = "123"),
+        id = ResumeIdModel(id = "f62d0c1c-bccd-486f-9364-857581cd6282"),
         firstName = "Ivan",
         lastName = "Ivanov",
         middleName = "Ivanovich",
@@ -13,11 +13,11 @@ object Ivan {
         gender = ResumeGenderModel.MALE,
         ownerId = OwnerIdModel(id = "111111-22222"),
         visibility = ResumeVisibilityModel.PUBLIC,
-        permissions = mutableSetOf(PermissionsModel.READ)
+        permissions = mutableSetOf(PermissionModel.READ)
     )
 
     private val stubInProgress = ResumeModel(
-        id = ResumeIdModel(id = "1234567890"),
+        id = ResumeIdModel(id = "f62d0c1c-bccd-486f-9364-857581cd6282"),
         firstName = "Ivan",
         lastName = "Ivanov",
         middleName = "Ivanovich",
@@ -26,10 +26,10 @@ object Ivan {
         gender = ResumeGenderModel.MALE,
         ownerId = OwnerIdModel(id = "22-33"),
         visibility = ResumeVisibilityModel.OWNER_ONLY,
-        permissions = mutableSetOf(PermissionsModel.NONE)
+        permissions = mutableSetOf(PermissionModel.NONE)
     )
 
-    fun getModel(model: (ResumeModel.() -> Unit)? = null) = stubReady.also { stub ->
+    fun getModel(model: (ResumeModel.() -> Unit)? = null) = stubReady.copy().also { stub ->
         model?.let { stub.apply(it)}
     }
 

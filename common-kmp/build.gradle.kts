@@ -25,13 +25,6 @@ kotlin {
         }
     }
     jvm{}
-    linuxX64 {
-        binaries {
-            executable {
-                baseName = "first App"
-            }
-        }
-    }
 
     sourceSets {
         val commonMain by getting {
@@ -65,17 +58,6 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
-            }
-        }
-
-        val linuxX64Main by getting {
-            dependencies {
-                implementation(kotlin("stdlib"))
-            }
-        }
-        val linuxX64Test by getting {
-            dependencies {
-                implementation(kotlin("test"))
             }
         }
     }

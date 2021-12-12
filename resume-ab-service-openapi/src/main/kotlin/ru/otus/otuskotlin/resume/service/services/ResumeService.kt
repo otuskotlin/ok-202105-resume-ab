@@ -47,7 +47,7 @@ class ResumeService(
         return context.toDeleteResponse()
     }
 
-    fun error(context: ResumeContext, e: Throwable): BaseMessage {
+    suspend fun error(context: ResumeContext, e: Throwable): BaseMessage {
         context.addError(e)
         return context.toReadResponse()
     }

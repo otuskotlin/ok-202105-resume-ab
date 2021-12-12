@@ -22,6 +22,8 @@ dependencies {
     implementation(project(":resume-ab-validation"))
     //stubs
     implementation(project(":resume-ab-stubs"))
+    //Db
+    implementation(project(":resume-ab-repo-inmemory"))
 
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))

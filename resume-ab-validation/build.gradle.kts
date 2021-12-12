@@ -2,13 +2,13 @@ plugins {
     kotlin("jvm")
 }
 
+val coroutinesVersion: String by project
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    val coroutinesVersion: String by project
     implementation(kotlin("stdlib"))
 
 
@@ -16,7 +16,7 @@ dependencies {
     implementation(project(":common"))
 
     testImplementation(kotlin("test"))
-    testImplementation(kotlin("test-junit"))
+//    testImplementation(kotlin("test-junit"))
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
 }
