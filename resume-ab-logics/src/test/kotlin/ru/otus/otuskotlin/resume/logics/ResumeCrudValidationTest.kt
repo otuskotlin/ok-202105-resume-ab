@@ -5,9 +5,7 @@ import org.junit.Test
 import resume.stubs.Ivan
 import ru.otus.otuskotlin.resume.backend.common.context.CorStatus
 import ru.otus.otuskotlin.resume.backend.common.context.ResumeContext
-import ru.otus.otuskotlin.resume.backend.common.models.IError
-import ru.otus.otuskotlin.resume.backend.common.models.ResumeIdModel
-import ru.otus.otuskotlin.resume.backend.common.models.ResumeStubCase
+import ru.otus.otuskotlin.resume.backend.common.models.*
 import java.time.Instant
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -27,6 +25,13 @@ class ResumeCrudValidationTest {
             operation = ResumeContext.ResumeOperations.CREATE,
             requestResume = Ivan.getModel{ id = ResumeIdModel("f62d0c1c-bccd-486f-9364-857581cd6282") },
             stubCase = ResumeStubCase.SUCCESS,
+            principal = ResumePrincipalModel(
+                id = Ivan.getModel().ownerId,
+                firstName = "Ivan",
+                middleName = "Ivanovich",
+                lastName = "Ivanov",
+                groups = setOf(ResumeUserGroups.TEST, ResumeUserGroups.USER)
+            ),
         )
         runBlocking {
             crud.create(context)
@@ -42,6 +47,13 @@ class ResumeCrudValidationTest {
             operation = ResumeContext.ResumeOperations.CREATE,
             requestResume = Ivan.getModel{ id = Ivan.getModel().id },
             stubCase = ResumeStubCase.SUCCESS,
+            principal = ResumePrincipalModel(
+                id = Ivan.getModel().ownerId,
+                firstName = "Ivan",
+                middleName = "Ivanovich",
+                lastName = "Ivanov",
+                groups = setOf(ResumeUserGroups.TEST, ResumeUserGroups.USER)
+            ),
         )
         runBlocking {
             crud.create(context)

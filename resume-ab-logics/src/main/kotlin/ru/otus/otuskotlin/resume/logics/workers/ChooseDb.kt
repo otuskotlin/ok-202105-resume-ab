@@ -2,6 +2,7 @@ package ru.otus.otuskotlin.resume.logics.workers
 
 import ru.otus.otuskotlin.resume.backend.common.context.ResumeContext
 import ru.otus.otuskotlin.resume.backend.common.models.ResumeStubCase
+import ru.otus.otuskotlin.resume.backend.common.models.ResumeUserGroups
 import ru.otus.otuskotlin.resume.backend.common.models.WorkMode
 import ru.otus.otuskotlin.resume.backend.repo.common.IRepoResume
 import ru.otus.otuskotlin.resume.cor.ICorChainDsl
@@ -15,6 +16,10 @@ internal fun ICorChainDsl<ResumeContext>.chooseDb(title: String) = worker {
     """.trimIndent()
 
     handle {
+        if(principal.groups.contains(ResumeUserGroups.TEST)) {
+            resumeRepo = config.repoTest
+            return@handle
+        }
         resumeRepo = when(workMode) {
             WorkMode.PROD -> config.repoProd
             WorkMode.TEST -> config.repoTest

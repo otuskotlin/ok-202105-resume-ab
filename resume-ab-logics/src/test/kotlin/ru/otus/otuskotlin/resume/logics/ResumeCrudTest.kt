@@ -6,7 +6,9 @@ import resume.stubs.Ivan
 import ru.otus.otuskotlin.resume.backend.common.context.CorStatus
 import ru.otus.otuskotlin.resume.backend.common.context.ResumeContext
 import ru.otus.otuskotlin.resume.backend.common.models.ResumeIdModel
+import ru.otus.otuskotlin.resume.backend.common.models.ResumePrincipalModel
 import ru.otus.otuskotlin.resume.backend.common.models.ResumeStubCase
+import ru.otus.otuskotlin.resume.backend.common.models.ResumeUserGroups
 import java.time.Instant
 import kotlin.test.assertEquals
 /**
@@ -32,6 +34,13 @@ class ResumeCrudTest {
             operation = ResumeContext.ResumeOperations.CREATE,
             requestResume = Ivan.getModel{ id = ResumeIdModel.NONE },
             stubCase = ResumeStubCase.SUCCESS,
+            principal = ResumePrincipalModel(
+                id = Ivan.getModel().ownerId,
+                firstName = "Ivan",
+                middleName = "Ivanovich",
+                lastName = "Ivanov",
+                groups = setOf(ResumeUserGroups.TEST, ResumeUserGroups.USER)
+            ),
         )
         runBlocking {
             crud.create(context)
@@ -59,6 +68,13 @@ class ResumeCrudTest {
             operation = ResumeContext.ResumeOperations.READ,
             requestResumeId = Ivan.getModel().id,
             stubCase = ResumeStubCase.SUCCESS,
+            principal = ResumePrincipalModel(
+                id = Ivan.getModel().ownerId,
+                firstName = "Ivan",
+                middleName = "Ivanovich",
+                lastName = "Ivanov",
+                groups = setOf(ResumeUserGroups.TEST, ResumeUserGroups.USER)
+            ),
         )
         runBlocking {
             crud.read(context)
@@ -86,6 +102,13 @@ class ResumeCrudTest {
             operation = ResumeContext.ResumeOperations.UPDATE,
             requestResume = Ivan.getModel(),
             stubCase = ResumeStubCase.SUCCESS,
+            principal = ResumePrincipalModel(
+                id = Ivan.getModel().ownerId,
+                firstName = "Ivan",
+                middleName = "Ivanovich",
+                lastName = "Ivanov",
+                groups = setOf(ResumeUserGroups.TEST, ResumeUserGroups.USER)
+            ),
         )
         runBlocking {
             crud.update(context)
@@ -113,6 +136,13 @@ class ResumeCrudTest {
             operation = ResumeContext.ResumeOperations.DELETE,
             requestResumeId = Ivan.getModel().id,
             stubCase = ResumeStubCase.SUCCESS,
+            principal = ResumePrincipalModel(
+                id = Ivan.getModel().ownerId,
+                firstName = "Ivan",
+                middleName = "Ivanovich",
+                lastName = "Ivanov",
+                groups = setOf(ResumeUserGroups.TEST, ResumeUserGroups.USER)
+            ),
         )
         runBlocking {
             crud.delete(context)
