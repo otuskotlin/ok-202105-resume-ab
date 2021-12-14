@@ -4,10 +4,14 @@ import ru.otus.otuskotlin.resume.backend.common.context.ResumeContext
 import ru.otus.otuskotlin.resume.backend.common.exceptions.ResumeOperationNotSet
 import ru.otus.otuskotlin.resume.backend.common.models.*
 import ru.otus.otuskotlin.resume.openapi.models.*
+import java.time.Instant
+import java.util.*
 
 fun ResumeContext.toInitResponse() = InitResumeResponse(
     requestId = onRequest.takeIf { it.isNotBlank() },
     errors = errors.takeIf { it.isNotEmpty() }?.map { it.toTransport() },
+    result = if(errors.find { it.level == IError.Level.ERROR } == null) InitResumeResponse.Result.SUCCESS
+    else InitResumeResponse.Result.ERROR
 )
 
 private fun IError.toTransport() = RequestError(
@@ -68,3 +72,16 @@ fun ResumeContext.toResponse() = when(operation) {
     ResumeContext.ResumeOperations.DELETE -> toDeleteResponse()
     ResumeContext.ResumeOperations.NONE -> throw ResumeOperationNotSet("Operation for error response is not set")
 }
+
+fun ResumeContext.toLog(logId: String) = CommonLogModel(
+    messageId = UUID.randomUUID().toString(),
+    messageTime = Instant.now().toString(),
+    source = "ok-marketplace",
+    logId = logId,
+    resume = ResumeLogModel(
+        requestAdId = requestResumeId.takeIf { it != ResumeIdModel.NONE }?.asString(),
+        requestAd = requestResume.takeIf { it != ResumeModel() }?.toTransport(),
+        responseAd = responseResume.takeIf { it != ResumeModel() }?.toTransport(),
+    ),
+    errors = errors.takeIf { it.isNotEmpty() }?.map { it.toTransport() },
+)
