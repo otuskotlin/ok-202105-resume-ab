@@ -4,6 +4,7 @@ import io.ktor.http.cio.websocket.*
 import io.ktor.server.testing.*
 import org.junit.Test
 import com.fasterxml.jackson.module.kotlin.readValue
+import ru.otus.otuskotlin.resume.ktor.configs.AppKtorConfig
 import ru.otus.otuskotlin.resume.ktor.module
 import ru.otus.otuskotlin.resume.openapi.models.BaseMessage
 import ru.otus.otuskotlin.resume.openapi.models.CreateResumeRequest
@@ -15,7 +16,9 @@ import kotlin.test.assertIs
 class WsControllerTest {
     @Test
     fun test() {
-        withTestApplication({ module() }) {
+        withTestApplication({
+            module(config = AppKtorConfig())
+        }) {
 //            handleWebSocketConversation("/ws") { incoming, outgoing ->
 //                run {
 //                    val responseFrame = incoming.receive()

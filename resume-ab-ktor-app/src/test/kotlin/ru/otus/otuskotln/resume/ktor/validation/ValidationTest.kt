@@ -4,6 +4,7 @@ import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
 import org.junit.Test
+import ru.otus.otuskotlin.resume.ktor.configs.AppKtorConfig
 import ru.otus.otuskotlin.resume.ktor.module
 import ru.otus.otuskotlin.resume.openapi.models.CreateResumeResponse
 import ru.otus.otuskotln.resume.ktor.Utils
@@ -14,7 +15,9 @@ import kotlin.test.fail
 class ValidationTest {
     @Test
     fun badJson() {
-        withTestApplication(Application::module) {
+        withTestApplication({
+            module(config = AppKtorConfig())
+        }) {
             handleRequest(HttpMethod.Post, "/resume/create") {
                 addHeader(HttpHeaders.ContentType, ContentType.Application.Json.withCharset(Charsets.UTF_8).toString())
                 setBody("{")

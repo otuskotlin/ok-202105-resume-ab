@@ -5,7 +5,8 @@ import io.ktor.http.*
 import io.ktor.server.testing.*
 import org.junit.Test
 import resume.stubs.Ivan
-import ru.otus.otuskotlin.resume.ktor.AppKtorConfig
+import ru.otus.otuskotlin.resume.ktor.configs.AppKtorConfig
+import ru.otus.otuskotlin.resume.ktor.configs.KtorAuthConfig
 import ru.otus.otuskotlin.resume.ktor.module
 import ru.otus.otuskotlin.resume.openapi.models.BaseDebugRequest
 import ru.otus.otuskotlin.resume.openapi.models.ReadResumeRequest
@@ -29,6 +30,7 @@ class RepoReadTest {
         }) {
             handleRequest(HttpMethod.Post, "/resume/read") {
                 addHeader(HttpHeaders.ContentType, ContentType.Application.Json.withCharset(Charsets.UTF_8).toString())
+                addHeader(HttpHeaders.Authorization, "Bearer ${KtorAuthConfig.testUserToken()}")
                 val request = ReadResumeRequest(
                     readResumeId = resume.id.asString(),
                     debug = BaseDebugRequest(mode = BaseDebugRequest.Mode.TEST)

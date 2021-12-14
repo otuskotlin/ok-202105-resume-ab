@@ -1,7 +1,8 @@
-package ru.otus.otuskotlin.resume.ktor
+package ru.otus.otuskotlin.resume.ktor.configs
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import io.ktor.application.*
 import ru.otus.otuskotlin.resume.backend.common.context.ContextConfig
 import ru.otus.otuskotlin.resume.backend.repo.common.IRepoResume
 import ru.otus.otuskotlin.resume.ktor.controller.KtorUserSession
@@ -19,6 +20,11 @@ data class AppKtorConfig(
         repoProd = resumeRepoProd,
         repoTest = resumeRepoTest
     ),
+    val auth: KtorAuthConfig = KtorAuthConfig.TEST,
     val crud: ResumeCrud = ResumeCrud(contextConfig),
     val resumeService: ResumeService = ResumeService(crud)
-) {companion object{}}
+) {
+    constructor(environment: ApplicationEnvironment): this(
+        auth = KtorAuthConfig(environment)
+    )
+    companion object{}}
