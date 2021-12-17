@@ -564,3 +564,39 @@ components:
             deletedResume:
               $ref: '#/components/schemas/ResponseResume'
 
+    ResumeLogModel:
+      description: Модель логирования
+      allOf:
+        - type: object
+          properties:
+            requestAdId:
+              type: string
+            requestAd:
+              $ref: '#/components/schemas/ResponseResume'
+            responseAd:
+              $ref: '#/components/schemas/ResponseResume'
+            responseAds:
+              type: array
+              items:
+                $ref: '#/components/schemas/ResponseResume'
+
+    CommonLogModel:
+      description: Модель логирования
+      allOf:
+        - type: object
+          properties:
+            messageId:
+              type: string
+            messageTime:
+              type: string
+            logId:
+              type: string
+            source:
+              type: string
+            resume:
+              $ref: '#/components/schemas/ResumeLogModel'
+            errors:
+              type: array
+              items:
+                $ref: '#/components/schemas/RequestError'
+
