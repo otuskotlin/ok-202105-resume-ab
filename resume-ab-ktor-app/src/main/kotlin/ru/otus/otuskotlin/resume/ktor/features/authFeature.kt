@@ -10,7 +10,7 @@ import ru.otus.otuskotlin.resume.ktor.configs.KtorAuthConfig.Companion.GROUPS_CL
 
 fun Application.authFeature(config: AppKtorConfig) {
     install(Authentication) {
-        jwt("auh-jwt") {
+        jwt("auth-jwt") {
             realm = config.auth.realm
             verifier(
                 JWT.require(Algorithm.HMAC256(config.auth.secret))
@@ -28,10 +28,10 @@ fun Application.authFeature(config: AppKtorConfig) {
                         log.error("Wrong issuer in JWT token ${jwtCredential.payload.issuer}. Must be ${config.auth.issuer}")
                         null
                     }
-                    jwtCredential.payload.getClaim(GROUPS_CLAIM).asList(String::class.java).isNullOrEmpty() -> {
-                        log.error("Groups claim must not be empty in JWT token")
-                        null
-                    }
+//                    jwtCredential.payload.getClaim(GROUPS_CLAIM).asList(String::class.java).isNullOrEmpty() -> {
+//                        log.error("Groups claim must not be empty in JWT token: ${jwtCredential.payload.getClaim(GROUPS_CLAIM)}")
+//                        null
+//                    }
                     else -> JWTPrincipal(jwtCredential.payload)
                 }
             }

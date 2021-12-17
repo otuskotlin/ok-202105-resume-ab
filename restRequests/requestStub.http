@@ -1,11 +1,6 @@
-### getToken
-GET http://localhost:8080/login
-
-
 ### create
 POST http://localhost:8080/resume/create
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtdXNlcnMiLCJpc3MiOiJPdHVzS290bGluIiwiZXhwIjoxNjM5Nzc4MDM4LCJ1c2VybmFtZSI6InRlc3RVc2VyTmFtZSJ9.8Mjc0ompiZS914uQiedCCRuM5wcNG6JnH031G8McZHs
 
 {
   "messageType": "CreateResumeRequest",
@@ -21,7 +16,8 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtd
     "visibility": "public"
   },
   "debug": {
-    "mode": "test"
+    "mode": "stub",
+    "stub": "success"
   }
 }
 
