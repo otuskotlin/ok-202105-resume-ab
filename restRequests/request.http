@@ -5,7 +5,7 @@ GET http://localhost:8080/login
 ### create
 POST http://localhost:8080/resume/create
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtdXNlcnMiLCJmaXJzdE5hbWUiOiJ0ZXN0Rmlyc3ROYW1lIiwibGFzdE5hbWUiOiJ0ZXN0TGFzdE5hbWUiLCJpc3MiOiJPdHVzS290bGluIiwiZ3JvdXBzIjpbIlVTRVIiLCJURVNUIl0sIm1pZGRsZU5hbWUiOiJ0ZXN0TWlkZGxlTmFtZSIsImV4cCI6MTYzOTg1NDY1MX0.6o35nsHYsW8zoETr_s868USjOH_GhBR9h-MkvcYshlU
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtdXNlcnMiLCJmaXJzdE5hbWUiOiJ0ZXN0Rmlyc3ROYW1lIiwibGFzdE5hbWUiOiJ0ZXN0TGFzdE5hbWUiLCJpc3MiOiJPdHVzS290bGluIiwiZ3JvdXBzIjpbIlVTRVIiLCJURVNUIl0sIm1pZGRsZU5hbWUiOiJ0ZXN0TWlkZGxlTmFtZSIsImV4cCI6MTYzOTg1NTIwMH0.WisMRu3nxdF04A6hjoXr6XXCuX6Hg99LN7j4eeIDxMA
 
 {
   "messageType": "CreateResumeRequest",
@@ -28,12 +28,36 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtd
 ###read
 POST http://localhost:8080/resume/read
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtdXNlcnMiLCJmaXJzdE5hbWUiOiJ0ZXN0Rmlyc3ROYW1lIiwibGFzdE5hbWUiOiJ0ZXN0TGFzdE5hbWUiLCJpc3MiOiJPdHVzS290bGluIiwiZ3JvdXBzIjpbIlVTRVIiLCJURVNUIl0sIm1pZGRsZU5hbWUiOiJ0ZXN0TWlkZGxlTmFtZSIsImV4cCI6MTYzOTg1NDY1MX0.6o35nsHYsW8zoETr_s868USjOH_GhBR9h-MkvcYshlU
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtdXNlcnMiLCJmaXJzdE5hbWUiOiJ0ZXN0Rmlyc3ROYW1lIiwibGFzdE5hbWUiOiJ0ZXN0TGFzdE5hbWUiLCJpc3MiOiJPdHVzS290bGluIiwiZ3JvdXBzIjpbIlVTRVIiLCJURVNUIl0sIm1pZGRsZU5hbWUiOiJ0ZXN0TWlkZGxlTmFtZSIsImV4cCI6MTYzOTg1NTIwMH0.WisMRu3nxdF04A6hjoXr6XXCuX6Hg99LN7j4eeIDxMA
 
 {
   "messageType": "ReadResumeRequest",
   "requestId": "2",
-  "readResumeId": "27b8be6c-6c5d-497a-9539-aa9f5250f6c8",
+  "readResumeId": "777522af-dcc4-48b7-9ab1-ad491c281389",
+  "debug": {
+    "mode": "test"
+  }
+}
+
+### update
+POST http://localhost:8080/resume/update
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtdXNlcnMiLCJmaXJzdE5hbWUiOiJ0ZXN0Rmlyc3ROYW1lIiwibGFzdE5hbWUiOiJ0ZXN0TGFzdE5hbWUiLCJpc3MiOiJPdHVzS290bGluIiwiZ3JvdXBzIjpbIlVTRVIiLCJURVNUIl0sIm1pZGRsZU5hbWUiOiJ0ZXN0TWlkZGxlTmFtZSIsImV4cCI6MTYzOTg1NTIwMH0.WisMRu3nxdF04A6hjoXr6XXCuX6Hg99LN7j4eeIDxMA
+
+{
+  "messageType": "UpdateResumeRequest",
+  "requestId": "123",
+  "createResume": {
+    "lastName": "Petrov",
+    "firstName": "Petr",
+    "middleName": "Petrovich",
+    "age": "10",
+    "ownerId": "123",
+    "birthDate": "1999-10-10",
+    "gender": "male",
+    "visibility": "public",
+    "id" : "777522af-dcc4-48b7-9ab1-ad491c281389"
+  },
   "debug": {
     "mode": "test"
   }
@@ -42,12 +66,12 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtd
 ### delete
 POST http://localhost:8080/resume/delete
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtdXNlcnMiLCJmaXJzdE5hbWUiOiJ0ZXN0Rmlyc3ROYW1lIiwibGFzdE5hbWUiOiJ0ZXN0TGFzdE5hbWUiLCJpc3MiOiJPdHVzS290bGluIiwiZ3JvdXBzIjpbIlVTRVIiLCJURVNUIl0sIm1pZGRsZU5hbWUiOiJ0ZXN0TWlkZGxlTmFtZSIsImV4cCI6MTYzOTg1NDY1MX0.6o35nsHYsW8zoETr_s868USjOH_GhBR9h-MkvcYshlU
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtdXNlcnMiLCJmaXJzdE5hbWUiOiJ0ZXN0Rmlyc3ROYW1lIiwibGFzdE5hbWUiOiJ0ZXN0TGFzdE5hbWUiLCJpc3MiOiJPdHVzS290bGluIiwiZ3JvdXBzIjpbIlVTRVIiLCJURVNUIl0sIm1pZGRsZU5hbWUiOiJ0ZXN0TWlkZGxlTmFtZSIsImV4cCI6MTYzOTg1NTIwMH0.WisMRu3nxdF04A6hjoXr6XXCuX6Hg99LN7j4eeIDxMA
 
 {
   "messageType": "DeleteResumeRequest",
   "requestId": "3",
-  "deleteResumeId": "27b8be6c-6c5d-497a-9539-aa9f5250f6c8",
+  "deleteResumeId": "777522af-dcc4-48b7-9ab1-ad491c281389",
   "debug": {
     "mode": "test"
   }
