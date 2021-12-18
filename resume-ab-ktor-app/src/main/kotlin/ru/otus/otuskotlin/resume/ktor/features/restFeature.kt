@@ -55,11 +55,13 @@ fun Application.restFeature(config: AppKtorConfig) {
             val token = JWT.create()
                 .withAudience(KtorAuthConfig.TEST.audience)
                 .withIssuer(KtorAuthConfig.TEST.issuer)
-                .withClaim("groups", "TEST")
-                .withClaim("username", "testUserName")
+                .withClaim(KtorAuthConfig.GROUPS_CLAIM, mutableListOf("USER", "TEST"))
+                .withClaim(KtorAuthConfig.F_NAME_CLAIM, "testFirstName")
+                .withClaim(KtorAuthConfig.M_NAME_CLAIM, "testMiddleName")
+                .withClaim(KtorAuthConfig.L_NAME_CLAIM, "testLastName")
                 .withExpiresAt(Date(System.currentTimeMillis() + 6000000))
                 .sign(Algorithm.HMAC256(KtorAuthConfig.TEST.secret))
-            call.respond(hashMapOf("token" to token)).also {  println("Test JWT token: $this") }
+            call.respond(hashMapOf("token" to token)).also {  println("Test JWT token got: $this") }
         }
 
         authenticate("auth-jwt") {

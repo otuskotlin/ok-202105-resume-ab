@@ -5,18 +5,18 @@ GET http://localhost:8080/login
 ### create
 POST http://localhost:8080/resume/create
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtdXNlcnMiLCJpc3MiOiJPdHVzS290bGluIiwiZXhwIjoxNjM5Nzc4MDM4LCJ1c2VybmFtZSI6InRlc3RVc2VyTmFtZSJ9.8Mjc0ompiZS914uQiedCCRuM5wcNG6JnH031G8McZHs
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtdXNlcnMiLCJmaXJzdE5hbWUiOiJ0ZXN0Rmlyc3ROYW1lIiwibGFzdE5hbWUiOiJ0ZXN0TGFzdE5hbWUiLCJpc3MiOiJPdHVzS290bGluIiwiZ3JvdXBzIjpbIlVTRVIiLCJURVNUIl0sIm1pZGRsZU5hbWUiOiJ0ZXN0TWlkZGxlTmFtZSIsImV4cCI6MTYzOTg1NDY1MX0.6o35nsHYsW8zoETr_s868USjOH_GhBR9h-MkvcYshlU
 
 {
   "messageType": "CreateResumeRequest",
-  "requestId": "1",
+  "requestId": "123",
   "createResume": {
     "lastName": "Ivanov",
     "firstName": "Ivan",
     "middleName": "Ivanovich",
     "age": "10",
     "ownerId": "123",
-    "birthDate": "2011-10-10",
+    "birthDate": "1999-10-10",
     "gender": "male",
     "visibility": "public"
   },
@@ -28,27 +28,27 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtd
 ###read
 POST http://localhost:8080/resume/read
 Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtdXNlcnMiLCJmaXJzdE5hbWUiOiJ0ZXN0Rmlyc3ROYW1lIiwibGFzdE5hbWUiOiJ0ZXN0TGFzdE5hbWUiLCJpc3MiOiJPdHVzS290bGluIiwiZ3JvdXBzIjpbIlVTRVIiLCJURVNUIl0sIm1pZGRsZU5hbWUiOiJ0ZXN0TWlkZGxlTmFtZSIsImV4cCI6MTYzOTg1NDY1MX0.6o35nsHYsW8zoETr_s868USjOH_GhBR9h-MkvcYshlU
 
 {
   "messageType": "ReadResumeRequest",
   "requestId": "2",
-  "readResumeId": "123",
+  "readResumeId": "27b8be6c-6c5d-497a-9539-aa9f5250f6c8",
   "debug": {
-    "mode": "stub",
-    "stub": "success"
+    "mode": "test"
   }
 }
 
 ### delete
 POST http://localhost:8080/resume/delete
 Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtdXNlcnMiLCJmaXJzdE5hbWUiOiJ0ZXN0Rmlyc3ROYW1lIiwibGFzdE5hbWUiOiJ0ZXN0TGFzdE5hbWUiLCJpc3MiOiJPdHVzS290bGluIiwiZ3JvdXBzIjpbIlVTRVIiLCJURVNUIl0sIm1pZGRsZU5hbWUiOiJ0ZXN0TWlkZGxlTmFtZSIsImV4cCI6MTYzOTg1NDY1MX0.6o35nsHYsW8zoETr_s868USjOH_GhBR9h-MkvcYshlU
 
 {
   "messageType": "DeleteResumeRequest",
-  "requestId": null,
-  "deleteResumeId": "123",
+  "requestId": "3",
+  "deleteResumeId": "27b8be6c-6c5d-497a-9539-aa9f5250f6c8",
   "debug": {
-    "mode": "stub",
-    "stub": "success"
+    "mode": "test"
   }
 }

@@ -28,10 +28,10 @@ fun Application.authFeature(config: AppKtorConfig) {
                         log.error("Wrong issuer in JWT token ${jwtCredential.payload.issuer}. Must be ${config.auth.issuer}")
                         null
                     }
-//                    jwtCredential.payload.getClaim(GROUPS_CLAIM).asList(String::class.java).isNullOrEmpty() -> {
-//                        log.error("Groups claim must not be empty in JWT token: ${jwtCredential.payload.getClaim(GROUPS_CLAIM)}")
-//                        null
-//                    }
+                    jwtCredential.payload.getClaim(GROUPS_CLAIM).asList(String::class.java).isNullOrEmpty() -> {
+                        log.error("Groups claim must not be empty in JWT token: ${jwtCredential.payload.getClaim(GROUPS_CLAIM)}")
+                        null
+                    }
                     else -> JWTPrincipal(jwtCredential.payload)
                 }
             }

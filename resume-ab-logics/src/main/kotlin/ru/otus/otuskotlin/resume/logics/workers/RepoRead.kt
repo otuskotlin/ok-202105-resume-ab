@@ -16,7 +16,7 @@ internal fun ICorChainDsl<ResumeContext>.repoRead(title: String) = worker {
         val result = resumeRepo.read(DbResumeIdRequest(id = requestResumeId))
         val resultValue = result.result
         if (result.isSuccess && resultValue != null) {
-            responseResume = resultValue
+            dbResume = resultValue
         } else {
             result.errors.forEach { addError(it) }
         }

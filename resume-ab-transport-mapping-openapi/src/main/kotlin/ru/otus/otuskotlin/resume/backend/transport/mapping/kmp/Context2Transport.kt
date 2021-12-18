@@ -76,7 +76,7 @@ fun ResumeContext.toResponse() = when(operation) {
 fun ResumeContext.toLog(logId: String) = CommonLogModel(
     messageId = UUID.randomUUID().toString(),
     messageTime = Instant.now().toString(),
-    source = "ok-marketplace",
+    source = "ok-resume",
     logId = logId,
     resume = ResumeLogModel(
         requestAdId = requestResumeId.takeIf { it != ResumeIdModel.NONE }?.asString(),

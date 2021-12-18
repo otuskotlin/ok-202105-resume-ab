@@ -20,8 +20,8 @@ object ResumeDelete : ICorExec<ResumeContext> by chain<ResumeContext>({
 
     resumeValidation {
         validate<String?> {
-            on { this.requestResume.id.asString() }
-            validator(ValidatorStringNonEmpty(field = "id"))
+            on { this.requestResumeId.asString() }
+            validator(ValidatorStringNonEmpty(field = "requestResume.id"))
         }
     }
     chainPermissions("Вычисление разрешений для пользователя")
