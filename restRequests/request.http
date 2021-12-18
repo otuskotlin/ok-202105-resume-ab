@@ -5,7 +5,7 @@ GET http://localhost:8080/login
 ### create
 POST http://localhost:8080/resume/create
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtdXNlcnMiLCJmaXJzdE5hbWUiOiJ0ZXN0Rmlyc3ROYW1lIiwibGFzdE5hbWUiOiJ0ZXN0TGFzdE5hbWUiLCJpc3MiOiJPdHVzS290bGluIiwiZ3JvdXBzIjpbIlVTRVIiLCJURVNUIl0sIm1pZGRsZU5hbWUiOiJ0ZXN0TWlkZGxlTmFtZSIsImV4cCI6MTYzOTg1NTIwMH0.WisMRu3nxdF04A6hjoXr6XXCuX6Hg99LN7j4eeIDxMA
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtdXNlcnMiLCJmaXJzdE5hbWUiOiJ0ZXN0Rmlyc3ROYW1lIiwibGFzdE5hbWUiOiJ0ZXN0TGFzdE5hbWUiLCJpc3MiOiJPdHVzS290bGluIiwiZ3JvdXBzIjpbIlVTRVIiLCJURVNUIl0sIm1pZGRsZU5hbWUiOiJ0ZXN0TWlkZGxlTmFtZSIsImV4cCI6MTYzOTg2MTk0M30.i1R7wQxgqd3nvKnNyH0oTi81WjRWP5qZ0HFklFDRfnk
 
 {
   "messageType": "CreateResumeRequest",
@@ -21,28 +21,28 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtd
     "visibility": "public"
   },
   "debug": {
-    "mode": "test"
+    "mode": "prod"
   }
 }
 
 ###read
 POST http://localhost:8080/resume/read
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtdXNlcnMiLCJmaXJzdE5hbWUiOiJ0ZXN0Rmlyc3ROYW1lIiwibGFzdE5hbWUiOiJ0ZXN0TGFzdE5hbWUiLCJpc3MiOiJPdHVzS290bGluIiwiZ3JvdXBzIjpbIlVTRVIiLCJURVNUIl0sIm1pZGRsZU5hbWUiOiJ0ZXN0TWlkZGxlTmFtZSIsImV4cCI6MTYzOTg1NTIwMH0.WisMRu3nxdF04A6hjoXr6XXCuX6Hg99LN7j4eeIDxMA
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtdXNlcnMiLCJmaXJzdE5hbWUiOiJ0ZXN0Rmlyc3ROYW1lIiwibGFzdE5hbWUiOiJ0ZXN0TGFzdE5hbWUiLCJpc3MiOiJPdHVzS290bGluIiwiZ3JvdXBzIjpbIlVTRVIiLCJURVNUIl0sIm1pZGRsZU5hbWUiOiJ0ZXN0TWlkZGxlTmFtZSIsImV4cCI6MTYzOTg2MTk0M30.i1R7wQxgqd3nvKnNyH0oTi81WjRWP5qZ0HFklFDRfnk
 
 {
   "messageType": "ReadResumeRequest",
   "requestId": "2",
-  "readResumeId": "777522af-dcc4-48b7-9ab1-ad491c281389",
+  "readResumeId": "279f8eac-e872-42ee-96f0-8e890f787040",
   "debug": {
-    "mode": "test"
+    "mode": "prod"
   }
 }
 
 ### update
 POST http://localhost:8080/resume/update
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtdXNlcnMiLCJmaXJzdE5hbWUiOiJ0ZXN0Rmlyc3ROYW1lIiwibGFzdE5hbWUiOiJ0ZXN0TGFzdE5hbWUiLCJpc3MiOiJPdHVzS290bGluIiwiZ3JvdXBzIjpbIlVTRVIiLCJURVNUIl0sIm1pZGRsZU5hbWUiOiJ0ZXN0TWlkZGxlTmFtZSIsImV4cCI6MTYzOTg1NTIwMH0.WisMRu3nxdF04A6hjoXr6XXCuX6Hg99LN7j4eeIDxMA
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtdXNlcnMiLCJmaXJzdE5hbWUiOiJ0ZXN0Rmlyc3ROYW1lIiwibGFzdE5hbWUiOiJ0ZXN0TGFzdE5hbWUiLCJpc3MiOiJPdHVzS290bGluIiwiZ3JvdXBzIjpbIlVTRVIiLCJURVNUIl0sIm1pZGRsZU5hbWUiOiJ0ZXN0TWlkZGxlTmFtZSIsImV4cCI6MTYzOTg2MTk0M30.i1R7wQxgqd3nvKnNyH0oTi81WjRWP5qZ0HFklFDRfnk
 
 {
   "messageType": "UpdateResumeRequest",
@@ -59,20 +59,20 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtd
     "id" : "777522af-dcc4-48b7-9ab1-ad491c281389"
   },
   "debug": {
-    "mode": "test"
+    "mode": "prod"
   }
 }
 
 ### delete
 POST http://localhost:8080/resume/delete
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtdXNlcnMiLCJmaXJzdE5hbWUiOiJ0ZXN0Rmlyc3ROYW1lIiwibGFzdE5hbWUiOiJ0ZXN0TGFzdE5hbWUiLCJpc3MiOiJPdHVzS290bGluIiwiZ3JvdXBzIjpbIlVTRVIiLCJURVNUIl0sIm1pZGRsZU5hbWUiOiJ0ZXN0TWlkZGxlTmFtZSIsImV4cCI6MTYzOTg1NTIwMH0.WisMRu3nxdF04A6hjoXr6XXCuX6Hg99LN7j4eeIDxMA
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtdXNlcnMiLCJmaXJzdE5hbWUiOiJ0ZXN0Rmlyc3ROYW1lIiwibGFzdE5hbWUiOiJ0ZXN0TGFzdE5hbWUiLCJpc3MiOiJPdHVzS290bGluIiwiZ3JvdXBzIjpbIlVTRVIiLCJURVNUIl0sIm1pZGRsZU5hbWUiOiJ0ZXN0TWlkZGxlTmFtZSIsImV4cCI6MTYzOTg2MTk0M30.i1R7wQxgqd3nvKnNyH0oTi81WjRWP5qZ0HFklFDRfnk
 
 {
   "messageType": "DeleteResumeRequest",
   "requestId": "3",
   "deleteResumeId": "777522af-dcc4-48b7-9ab1-ad491c281389",
   "debug": {
-    "mode": "test"
+    "mode": "prod"
   }
 }
