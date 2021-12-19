@@ -8,14 +8,15 @@ import ru.otus.otuskotlin.resume.backend.repo.common.IRepoResume
 import ru.otus.otuskotlin.resume.ktor.controller.KtorUserSession
 import ru.otus.otuskotlin.resume.logics.ResumeCrud
 import ru.otus.otuskotlin.resume.repo.inmemory.RepoResumeInMemory
+import ru.otus.otuskotlin.resume.repo.sql.RepoResumeSQL
 import ru.otus.otuskotlin.resume.service.services.ResumeService
 import java.time.Duration
 
 data class AppKtorConfig(
     val userSessions: MutableSet<KtorUserSession> = mutableSetOf(),
     val objectMapper: ObjectMapper = jacksonObjectMapper(),
-    val resumeRepoTest: IRepoResume = RepoResumeInMemory(initObjects = listOf()),
-    val resumeRepoProd: IRepoResume = RepoResumeInMemory(initObjects = listOf(), ttl = Duration.ofHours(1)),
+    val resumeRepoTest: IRepoResume = RepoResumeInMemory(initObjects = listOf(), ttl = Duration.ofHours(1)),
+    val resumeRepoProd: IRepoResume = RepoResumeSQL(initObjects = listOf()),
     val contextConfig: ContextConfig = ContextConfig(
         repoProd = resumeRepoProd,
         repoTest = resumeRepoTest

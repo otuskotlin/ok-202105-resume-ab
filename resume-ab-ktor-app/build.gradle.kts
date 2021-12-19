@@ -61,6 +61,8 @@ dependencies {
     implementation(project(":resume-ab-stubs"))
     //DB
     implementation(project(":resume-ab-repo-inmemory"))
+    implementation(project(":resume-ab-repo-sql"))
+
     //Logging
     implementation(project(":resume-ab-logging"))
 }

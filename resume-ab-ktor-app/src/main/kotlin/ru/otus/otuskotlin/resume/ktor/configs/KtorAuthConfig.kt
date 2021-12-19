@@ -21,13 +21,16 @@ data class KtorAuthConfig(
     companion object {
         const val ID_CLAIM = "id"
         const val GROUPS_CLAIM = "groups"
+        const val F_NAME_CLAIM = "firstName"
+        const val M_NAME_CLAIM = "middleName"
+        const val L_NAME_CLAIM = "lastName"
 
 
         val TEST = KtorAuthConfig(
             secret = "secret",
             issuer = "OtusKotlin",
             audience = "resume-users",
-            realm = "Access to resume"
+            realm = "Access to resume",
         )
         fun testUserToken(): String = testToken("TEST", "USER")
         fun testAdminToken(): String = testToken("TEST", "USER", "ADMIN")

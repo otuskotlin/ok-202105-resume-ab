@@ -34,28 +34,28 @@ class ResumeService(
     }
 
     suspend fun createResume(context: ResumeContext, request: CreateResumeRequest): CreateResumeResponse {
-        crud.create(context.setQuery(request))
+        context.setQuery(request)
         return context.handle("create-resume", ResumeContext::toCreateResponse) {
             crud.create(it)
         }
     }
 
     suspend fun readResume(context: ResumeContext, request: ReadResumeRequest): ReadResumeResponse {
-        crud.read(context.setQuery(request))
+        context.setQuery(request)
         return context.handle("read-resume", ResumeContext::toReadResponse) {
             crud.read(it)
         }
     }
 
     suspend fun updateResume(context: ResumeContext, request: UpdateResumeRequest): UpdateResumeResponse {
-        crud.update(context.setQuery(request))
+        context.setQuery(request)
         return context.handle("update-resume", ResumeContext::toUpdateResponse) {
             crud.update(it)
         }
     }
 
     suspend fun deleteResume(context: ResumeContext, request: DeleteResumeRequest): DeleteResumeResponse {
-        crud.delete(context.setQuery(request))
+        context.setQuery(request)
         return context.handle("delete-resume", ResumeContext::toDeleteResponse) {
             crud.delete(it)
         }

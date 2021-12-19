@@ -15,8 +15,8 @@ fun main(args: Array<String>): Unit = EngineMain.main(args)
 @JvmOverloads
 fun Application.module(config: AppKtorConfig = AppKtorConfig(environment)) {
     install(Routing)
-    install(CallLogging)
     authFeature(config)
+    install(CallLogging)
     restFeature(config)
     wsFeature(config)
 }

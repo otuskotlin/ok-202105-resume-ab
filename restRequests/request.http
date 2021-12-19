@@ -1,50 +1,78 @@
+### getToken
+GET http://localhost:8080/login
+
+
 ### create
 POST http://localhost:8080/resume/create
 Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtdXNlcnMiLCJmaXJzdE5hbWUiOiJ0ZXN0Rmlyc3ROYW1lIiwibGFzdE5hbWUiOiJ0ZXN0TGFzdE5hbWUiLCJpc3MiOiJPdHVzS290bGluIiwiZ3JvdXBzIjpbIlVTRVIiLCJURVNUIl0sIm1pZGRsZU5hbWUiOiJ0ZXN0TWlkZGxlTmFtZSIsImV4cCI6MTYzOTg2MTk0M30.i1R7wQxgqd3nvKnNyH0oTi81WjRWP5qZ0HFklFDRfnk
 
 {
   "messageType": "CreateResumeRequest",
-  "requestId": "1",
+  "requestId": "123",
   "createResume": {
     "lastName": "Ivanov",
     "firstName": "Ivan",
     "middleName": "Ivanovich",
     "age": "10",
     "ownerId": "123",
-    "birthDate": "2011-10-10",
+    "birthDate": "1999-10-10",
     "gender": "male",
     "visibility": "public"
   },
   "debug": {
-    "mode": "stub",
-    "stub": "success"
+    "mode": "prod"
   }
 }
 
 ###read
 POST http://localhost:8080/resume/read
 Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtdXNlcnMiLCJmaXJzdE5hbWUiOiJ0ZXN0Rmlyc3ROYW1lIiwibGFzdE5hbWUiOiJ0ZXN0TGFzdE5hbWUiLCJpc3MiOiJPdHVzS290bGluIiwiZ3JvdXBzIjpbIlVTRVIiLCJURVNUIl0sIm1pZGRsZU5hbWUiOiJ0ZXN0TWlkZGxlTmFtZSIsImV4cCI6MTYzOTg2MTk0M30.i1R7wQxgqd3nvKnNyH0oTi81WjRWP5qZ0HFklFDRfnk
 
 {
   "messageType": "ReadResumeRequest",
   "requestId": "2",
-  "readResumeId": "123",
+  "readResumeId": "279f8eac-e872-42ee-96f0-8e890f787040",
   "debug": {
-    "mode": "stub",
-    "stub": "success"
+    "mode": "prod"
+  }
+}
+
+### update
+POST http://localhost:8080/resume/update
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtdXNlcnMiLCJmaXJzdE5hbWUiOiJ0ZXN0Rmlyc3ROYW1lIiwibGFzdE5hbWUiOiJ0ZXN0TGFzdE5hbWUiLCJpc3MiOiJPdHVzS290bGluIiwiZ3JvdXBzIjpbIlVTRVIiLCJURVNUIl0sIm1pZGRsZU5hbWUiOiJ0ZXN0TWlkZGxlTmFtZSIsImV4cCI6MTYzOTg2MTk0M30.i1R7wQxgqd3nvKnNyH0oTi81WjRWP5qZ0HFklFDRfnk
+
+{
+  "messageType": "UpdateResumeRequest",
+  "requestId": "123",
+  "createResume": {
+    "lastName": "Petrov",
+    "firstName": "Petr",
+    "middleName": "Petrovich",
+    "age": "10",
+    "ownerId": "123",
+    "birthDate": "1999-10-10",
+    "gender": "male",
+    "visibility": "public",
+    "id" : "777522af-dcc4-48b7-9ab1-ad491c281389"
+  },
+  "debug": {
+    "mode": "prod"
   }
 }
 
 ### delete
 POST http://localhost:8080/resume/delete
 Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZXN1bWUtdXNlcnMiLCJmaXJzdE5hbWUiOiJ0ZXN0Rmlyc3ROYW1lIiwibGFzdE5hbWUiOiJ0ZXN0TGFzdE5hbWUiLCJpc3MiOiJPdHVzS290bGluIiwiZ3JvdXBzIjpbIlVTRVIiLCJURVNUIl0sIm1pZGRsZU5hbWUiOiJ0ZXN0TWlkZGxlTmFtZSIsImV4cCI6MTYzOTg2MTk0M30.i1R7wQxgqd3nvKnNyH0oTi81WjRWP5qZ0HFklFDRfnk
 
 {
   "messageType": "DeleteResumeRequest",
-  "requestId": null,
-  "deleteResumeId": "123",
+  "requestId": "3",
+  "deleteResumeId": "777522af-dcc4-48b7-9ab1-ad491c281389",
   "debug": {
-    "mode": "stub",
-    "stub": "success"
+    "mode": "prod"
   }
 }

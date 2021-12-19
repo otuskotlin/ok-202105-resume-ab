@@ -1,5 +1,7 @@
 package ru.otus.otuskotlin.resume.ktor.features
 
+import com.auth0.jwt.JWT
+import com.auth0.jwt.algorithms.Algorithm
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.SerializationFeature
 import io.ktor.application.*
@@ -11,10 +13,12 @@ import io.ktor.jackson.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import ru.otus.otuskotlin.resume.ktor.configs.AppKtorConfig
+import ru.otus.otuskotlin.resume.ktor.configs.KtorAuthConfig
 import ru.otus.otuskotlin.resume.ktor.controller.createResume
 import ru.otus.otuskotlin.resume.ktor.controller.deleteResume
 import ru.otus.otuskotlin.resume.ktor.controller.readResume
 import ru.otus.otuskotlin.resume.ktor.controller.updateResume
+import java.util.*
 
 fun Application.restFeature(config: AppKtorConfig) {
     val resumeService = config.resumeService
@@ -45,6 +49,21 @@ fun Application.restFeature(config: AppKtorConfig) {
         get("/") {
             call.respondText("Hello World")
         }
+        get("login") {
+            // Check username and password
+            // ...
+            val token = JWT.create()
+                .withAudience(KtorAuthConfig.TEST.audience)
+                .withIssuer(KtorAuthConfig.TEST.issuer)
+                .withClaim(KtorAuthConfig.GROUPS_CLAIM, mutableListOf("USER", "TEST"))
+                .withClaim(KtorAuthConfig.F_NAME_CLAIM, "testFirstName")
+                .withClaim(KtorAuthConfig.M_NAME_CLAIM, "testMiddleName")
+                .withClaim(KtorAuthConfig.L_NAME_CLAIM, "testLastName")
+                .withExpiresAt(Date(System.currentTimeMillis() + 6000000))
+                .sign(Algorithm.HMAC256(KtorAuthConfig.TEST.secret))
+            call.respond(hashMapOf("token" to token)).also {  println("Test JWT token got: $this") }
+        }
+
         authenticate("auth-jwt") {
             route("resume") {
                 post("create") {
